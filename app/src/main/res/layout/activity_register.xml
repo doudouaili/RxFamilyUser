@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="registrer"
+            type="www.rxfamilyuser.com.coom.Login.viewmodel.RegisterModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_register"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="www.rxfamilyuser.com.coom.Login.view.RegisterActivity">
+
+        <include layout="@layout/titlebar" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/login_bj_list">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="210px"
+                    android:layout_marginLeft="47px"
+                    android:layout_marginRight="47px"
+                    android:layout_marginTop="40px"
+                    app:cardCornerRadius="12px"
+                    app:cardElevation="6px" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_quit_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|top"
+                    android:layout_marginTop="55px"
+                    android:onClick="btnFinsh"
+                    android:src="@mipmap/plus_x"
+                    android:transitionName="loginFab"
+                    app:fabSize="normal" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="240px"
+                    android:layout_marginLeft="70px"
+                    android:layout_marginRight="70px"
+                    android:layout_marginTop="98px"
+                    app:cardBackgroundColor="@color/regihter_password"
+                    app:cardCornerRadius="12px"
+                    app:cardElevation="6px"
+                    app:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="664px"
+                        android:layout_marginTop="10px"
+                        android:orientation="vertical">
+
+                        <!--手机号-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100px"
+                            android:layout_marginTop="90px"
+                            android:orientation="horizontal"
+                            android:paddingLeft="60px"
+                            android:paddingRight="60px">
+
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/ed_phone"
+                                android:textColorHint="@color/white">
+
+                                <EditText
+                                    android:id="@+id/edit_phone_register"
+                                    style="@style/reg_edit"
+                                    android:inputType="phone" />
+
+                            </android.support.design.widget.TextInputLayout>
+                        </LinearLayout>
+
+                        <!--验证码-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100px"
+                            android:orientation="horizontal"
+                            android:paddingLeft="60px">
+
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="20px"
+                                android:layout_weight="1"
+                                android:hint="@string/ed_code"
+                                android:textColorHint="@color/white">
+
+                                <EditText
+                                    android:id="@+id/edit_code"
+                                    style="@style/reg_edit"
+                                    android:inputType="phone" />
+                            </android.support.design.widget.TextInputLayout>
+
+                            <Button
+                                android:id="@+id/btn_code"
+                                android:layout_width="140px"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="35px"
+                                android:layout_marginRight="50px"
+                                android:background="@drawable/register_btn_bj_shape"
+                                android:onClick="btnCode"
+                                android:text="@string/code"
+                                android:textAllCaps="false"
+                                android:textColor="@color/login_view" />
+                        </LinearLayout>
+
+                        <!--第一次密码-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100px"
+                            android:orientation="horizontal"
+                            android:paddingLeft="60px"
+                            android:paddingRight="60px">
+
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/ed_password"
+                                android:textColorHint="@color/white">
+
+                                <EditText
+                                    android:id="@+id/edit_pwd"
+                                    style="@style/reg_edit"
+                                    android:inputType="textPassword" />
+
+                            </android.support.design.widget.TextInputLayout>
+                        </LinearLayout>
+
+
+                        <!--第二遍密码-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100px"
+                            android:orientation="horizontal"
+                            android:paddingLeft="60px"
+                            android:paddingRight="60px">
+
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/ed_two_password"
+                                android:textColorHint="@color/white">
+
+                                <EditText
+                                    android:id="@+id/edit_again_pwd"
+                                    style="@style/reg_edit"
+                                    android:inputType="textPassword" />
+                            </android.support.design.widget.TextInputLayout>
+                        </LinearLayout>
+
+
+                        <!--用户名-->
+                        <LinearLayout
+                            android:id="@+id/line_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="100px"
+                            android:orientation="horizontal"
+                            android:paddingLeft="60px"
+                            android:paddingRight="60px">
+
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/ed_username"
+                                android:textColorHint="@color/white">
+
+                                <EditText
+                                    android:id="@+id/edit_name"
+                                    style="@style/reg_edit" />
+
+                            </android.support.design.widget.TextInputLayout>
+                        </LinearLayout>
+
+
+                        <Button
+                            android:id="@+id/btn_register"
+                            android:layout_width="300px"
+                            android:layout_height="90px"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="20px"
+                            android:background="@drawable/register_btn_bj_shape"
+                            android:onClick="btnLogin"
+                            android:stateListAnimator="@animator/register_btn_animator_selector"
+                            android:text="@string/chick_login"
+                            android:textColor="@color/login_view" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </FrameLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

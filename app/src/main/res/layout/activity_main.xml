@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="main"
+            type="www.rxfamilyuser.com.coom.Login.viewmodel.MainModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            tools:openDrawer="start">
+
+            <LinearLayout
+                android:id="@+id/activity_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                </android.support.v4.view.ViewPager>
+
+                <RadioGroup
+                    android:id="@+id/rg"
+                    android:layout_width="match_parent"
+                    android:layout_height="96px"
+                    android:background="@color/colorAccent"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_home"
+                        style="@style/main_button_style"
+                        android:checked="true"
+                        android:drawableTop="@mipmap/home_icon"
+                        android:text="@string/rb_home" />
+
+                    <RadioButton
+                        android:id="@+id/rb_live"
+                        style="@style/main_button_style"
+                        android:drawableTop="@mipmap/live_icon"
+                        android:text="@string/rb_live" />
+
+                    <RadioButton
+                        android:id="@+id/rb_center"
+                        style="@style/main_button_style"
+                        android:drawableTop="@mipmap/personal_icon"
+                        android:text="@string/rb_center" />
+                </RadioGroup>
+            </LinearLayout>
+
+
+            <android.support.design.widget.NavigationView
+                android:id="@+id/nav_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:fitsSystemWindows="true"
+                app:menu="@menu/drawer_menu" />
+
+        </android.support.v4.widget.DrawerLayout>
+    </LinearLayout>
+
+</layout>

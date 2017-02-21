@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorAccent">#ff2bc1ab</color>
+    <color name="white">#ffffff</color>
+    <color name="gray">#cccccc</color>
+    <color name="black">#000000</color>
+    <color name="login_view">#2fa881</color>
+    <color name="phone">#c5c5c5</color>
+    <color name="btn_text">#D3D3D3</color>
+    <color name="forget_password">#9A9A9A</color>
+    <color name="regihter_password">#2ea67f</color>
+    <color name="test_head_color">#999999</color>
+</resources>

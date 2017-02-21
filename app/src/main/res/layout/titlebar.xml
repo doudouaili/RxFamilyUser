@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rl_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="96px"
+        android:background="@color/colorAccent">
+
+        <ImageView
+            android:id="@+id/titlebar_iv_left"
+            android:layout_width="96px"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:padding="15px"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/titlebar_tv_left"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="32px"
+            android:paddingRight="32px"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_px30"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/titlebar_iv_right"
+            android:layout_width="96px"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="15px"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/titlebar_tv_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:paddingRight="32px"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_px30" />
+
+        <TextView
+            android:id="@+id/titlebar_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_px38" />
+
+    </RelativeLayout>
+</layout>

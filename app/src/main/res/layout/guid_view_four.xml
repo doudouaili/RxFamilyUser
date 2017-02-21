@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/pic_guidepage_4" />
+
+    <Button
+
+        android:id="@+id/btn_home"
+        android:layout_width="200px"
+        android:layout_height="82px"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="240px"
+        android:background="@drawable/button_shape"
+        android:text="点击进入"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
+</FrameLayout>

@@ -1,0 +1,76 @@
+<resources>
+
+    <!-- Base application theme. -->
+
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- Activity全屏-->
+    <style name="MyFullScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+
+    <!--main底部RadioButton-->
+    <style name="main_button_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@null</item>
+        <item name="android:button">@null</item>
+        <item name="android:drawablePadding">6px</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/gray</item>
+
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!--    <AutoCompleteTextView
+                                android:id="@+id/et_password_login"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/login_edit_bj_selector"
+                                android:inputType="textPassword"
+                                android:paddingBottom="2dp"
+                                android:textColor="#2fa881"
+                                android:textCursorDrawable="@drawable/login_input_cursor_shape"
+                                android:textSize="15sp" />-->
+
+    <style name="autoTextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/login_edit_bj_selector</item>
+        <item name="android:paddingBottom">4px</item>
+        <item name="android:textColor">@color/login_view</item>
+        <item name="android:textCursorDrawable">@drawable/login_input_cursor_shape</item>
+        <item name="android:textSize">@dimen/_px30</item>
+
+    </style>
+    <style name="reg_edit">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/register_edit_bj_selector</item>
+        <item name="android:paddingBottom">4px</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textCursorDrawable">@drawable/register_input_cursor_shape</item>
+        <item name="android:textSize">@dimen/_px28</item>
+
+        <!-- android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/register_edit_bj_selector"
+                                    android:inputType="textPersonName"
+                                    android:paddingBottom="4px"
+                                    android:textColor="@color/white"
+                                    android:textCursorDrawable="@drawable/register_input_cursor_shape"
+                                    android:textSize="@dimen/_px28"-->
+    </style>
+</resources>

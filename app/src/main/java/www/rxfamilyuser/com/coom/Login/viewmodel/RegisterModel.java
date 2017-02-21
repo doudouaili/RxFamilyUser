@@ -1,0 +1,330 @@
+package www.rxfamilyuser.com.coom.Login.viewmodel;
+
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.content.Intent;
+import android.os.Build;
+import android.os.CountDownTimer;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
+import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.animation.AccelerateDecelerateInterpolator;
+
+import com.blankj.utilcode.utils.RegexUtils;
+import com.blankj.utilcode.utils.StringUtils;
+import com.blankj.utilcode.utils.ToastUtils;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import cn.smssdk.SMSSDK;
+import www.rxfamilyuser.com.R;
+import www.rxfamilyuser.com.base.BaseModel;
+import www.rxfamilyuser.com.coom.Login.bean.UserBean;
+import www.rxfamilyuser.com.coom.Login.netcontrol.impl.RegisterBizImpl;
+import www.rxfamilyuser.com.coom.Login.view.LoginActivity;
+import www.rxfamilyuser.com.coom.Login.view.MainActivity;
+import www.rxfamilyuser.com.coom.Login.view.RegisterActivity;
+import www.rxfamilyuser.com.databinding.ActivityRegisterBinding;
+import www.rxfamilyuser.com.util.AppManagerUtils;
+
+/**
+ * Created by ali on 2017/2/20.
+ */
+
+public class RegisterModel extends BaseModel<ActivityRegisterBinding, RegisterBizImpl> {
+    RegisterActivity activity;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        activity = (RegisterActivity) mBaseActivity;
+    }
+
+    @Override
+    public void onBeforeRequest() {
+
+    }
+
+    @Override
+    public void onSuccess(Object bean, int tag) {
+        UserBean userBean = (UserBean) bean;
+        if (userBean.getCode() == 1) {
+            Intent intent = new Intent(getContent(), MainActivity.class);
+            getContent().startActivity(intent);
+            ToastUtils.showShortToast(userBean.getMsg());
+            activity.finish();
+            AppManagerUtils.getActivity(LoginActivity.class).finish();
+
+        } else {
+            ToastUtils.showShortToast(userBean.getMsg());
+        }
+    }
+
+    @Override
+    public void onError(String errorMsg) {
+
+    }
+
+    /**
+     * 进入动画
+     */
+    public void showEnterAnimation() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Transition transition = TransitionInflater.from(activity).inflateTransition(R.transition.fabtransition);
+            activity.getWindow().setSharedElementEnterTransition(transition);
+            transition.addListener(new Transition.TransitionListener() {
+                @Override
+                public void onTransitionStart(Transition transition) {
+                    mBinder.cvMain.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onTransitionEnd(Transition transition) {
+                    showActivityEnterAnimation();
+                }
+
+                @Override
+                public void onTransitionCancel(Transition transition) {
+
+                }
+
+                @Override
+                public void onTransitionPause(Transition transition) {
+
+                }
+
+                @Override
+                public void onTransitionResume(Transition transition) {
+
+                }
+            });
+        }
+    }
+
+    /**
+     * 开启动画
+     */
+    private void showActivityEnterAnimation() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Animator animator = ViewAnimationUtils.createCircularReveal(mBinder.cvMain, mBinder.cvMain.getWidth() / 2, 0, mBinder.fabQuitRegister.getWidth() / 2, mBinder.cvMain.getHeight());
+            animator.setDuration(500);
+            animator.setInterpolator(new AccelerateDecelerateInterpolator());
+            animator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    mBinder.cvMain.setVisibility(View.VISIBLE);
+                    super.onAnimationStart(animation);
+                }
+            });
+            animator.start();
+        }
+    }
+
+    /**
+     * 结束动画
+     */
+    public void showActivityExitAnimation() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Animator animator = ViewAnimationUtils.createCircularReveal(mBinder.cvMain, mBinder.cvMain.getWidth() / 2, 0, mBinder.cvMain.getHeight(), mBinder.fabQuitRegister.getWidth() / 2);
+            animator.setDuration(500);
+            animator.setInterpolator(new AccelerateDecelerateInterpolator());
+            animator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mBinder.cvMain.setVisibility(View.GONE);
+                    super.onAnimationEnd(animation);
+                    mBinder.fabQuitRegister.setImageResource(R.mipmap.plus);
+                    activity.finish();
+                }
+            });
+            animator.start();
+
+        } else {
+            activity.finish();
+        }
+    }
+
+    /**
+     * 获取验证码
+     */
+    public void getCode() {
+        String phone = mBinder.editPhoneRegister.getText().toString().trim();
+
+        if (StringUtils.isEmpty(phone)) {
+            ToastUtils.showShortToast("您输入的手机号为空");
+            return;
+        }
+
+        if (RegexUtils.isMobileExact(phone)) {
+            SMSSDK.getVerificationCode("86", phone);
+            new TimeCount(60000, 1000).start();
+        } else {
+            ToastUtils.showShortToast("您输入的手机号格式不正确");
+        }
+    }
+
+    /**
+     * 注册
+     */
+    public void register() {
+
+        String phone = phoneReg();
+        String code = codeReg();
+        String psw = passWordReg();
+        String againPaw = againPassWordReg();
+        if (!psw.equals(againPaw)) {
+            ToastUtils.showShortToast("您输入的两次密码不一致");
+            return;
+        }
+        String name = userNameReg();
+
+        if (phone == "" | code == "" | psw == "" | againPaw == "" | name == "") {
+            return;
+        }
+
+        Map<String, String> map = new HashMap<>();
+        map.put("user_name", name);
+        map.put("user_password", psw);
+        map.put("user_code", code);
+        map.put("user_phone", phone);
+
+
+        mBiz.register(this, map);
+    }
+
+    /**
+     * 登录
+     */
+    public void login() {
+
+        String phone = phoneReg();
+        String code = codeReg();
+        String psw = passWordReg();
+        String againPaw = againPassWordReg();
+        if (psw.equals(againPaw)) {
+            ToastUtils.showShortToast("您输入的两次密码不一致");
+            return;
+        }
+    }
+
+    /**
+     * 手机号验证
+     *
+     * @return 手机号
+     */
+    private String phoneReg() {
+
+        String phone = mBinder.editPhoneRegister.getText().toString().trim();
+
+        if (StringUtils.isEmpty(phone)) {
+            ToastUtils.showShortToast("您输入的手机号为空");
+        } else if (!RegexUtils.isMobileExact(phone)) {
+            ToastUtils.showShortToast("您输入的手机号格式不正确");
+        } else {
+            return phone;
+        }
+        return "";
+    }
+
+    /**
+     * 验证码验证
+     *
+     * @return 输入的验证码
+     */
+    private String codeReg() {
+        String code = mBinder.editCode.getText().toString().trim();
+        if (StringUtils.isEmpty(code)) {
+            ToastUtils.showShortToast("您输入的验证码为空");
+        } else {
+            return code;
+        }
+        return "";
+    }
+
+    /**
+     * 第一次密码验证
+     *
+     * @return 密码
+     */
+    private String passWordReg() {
+        String pwd = mBinder.editPwd.getText().toString().trim();
+        if (StringUtils.isEmpty(pwd)) {
+            ToastUtils.showShortToast("您输入的密码空");
+        } else if (pwd.length() < 6 || pwd.length() > 12) {
+            ToastUtils.showShortToast("密码在6-12位之间");
+        } else {
+            return pwd;
+        }
+        return "";
+    }
+
+    /**
+     * 第二次密码验证
+     *
+     * @return 密码
+     */
+    private String againPassWordReg() {
+        String pwd = mBinder.editAgainPwd.getText().toString().trim();
+        if (StringUtils.isEmpty(pwd)) {
+            ToastUtils.showShortToast("您输入的二次密码为空");
+        } else if (pwd.length() < 6 || pwd.length() > 12) {
+            ToastUtils.showShortToast("二次密码在6-12位之间");
+        } else {
+            return pwd;
+        }
+        return "";
+    }
+
+    /**
+     * 用户名验证
+     *
+     * @return 用户名
+     */
+    private String userNameReg() {
+        String name = mBinder.editName.getText().toString().trim();
+        if (StringUtils.isEmpty(name)) {
+            ToastUtils.showShortToast("您输入的用户名为空");
+        } else if (name.length() > 8) {
+            ToastUtils.showShortToast("用户名的长度在8位一下");
+        } else {
+            return name;
+        }
+        return "";
+    }
+
+    /**
+     * 验证码时间设置
+     */
+    class TimeCount extends CountDownTimer {
+
+        /**
+         * @param millisInFuture    The number of millis in the future from the call
+         *                          to {@link #start()} until the countdown is done and {@link #onFinish()}
+         *                          is called.
+         * @param countDownInterval The interval along the way to receive
+         *                          {@link #onTick(long)} callbacks.
+         */
+        public TimeCount(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            mBinder.btnCode.setClickable(false);
+            mBinder.btnCode.setText(millisUntilFinished / 1000 + "s");
+            mBinder.btnCode.setTextColor(mBaseActivity.getResources().getColor(R.color.test_head_color));
+        }
+
+        @Override
+        public void onFinish() {
+            mBinder.btnCode.setText("重新获取");
+            mBinder.btnCode.setClickable(true);
+            mBinder.btnCode.setTextColor(mBaseActivity.getResources().getColor(R.color.login_view));
+        }
+    }
+
+
+}
