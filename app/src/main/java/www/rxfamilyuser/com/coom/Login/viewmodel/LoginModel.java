@@ -4,7 +4,15 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 
+import com.blankj.utilcode.utils.RegexUtils;
+import com.blankj.utilcode.utils.StringUtils;
+import com.blankj.utilcode.utils.ToastUtils;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import www.rxfamilyuser.com.base.BaseModel;
+import www.rxfamilyuser.com.coom.Login.bean.UserBean;
 import www.rxfamilyuser.com.coom.Login.netcontrol.impl.LoginBizImpl;
 import www.rxfamilyuser.com.coom.Login.view.LoginActivity;
 import www.rxfamilyuser.com.coom.Login.view.RegisterActivity;
@@ -24,7 +32,16 @@ public class LoginModel extends BaseModel<ActivityLoginBinding, LoginBizImpl> {
 
     @Override
     public void onSuccess(Object bean, int tag) {
-        //做界面显示或其他
+        //做面显示或其他
+        switch (tag) {
+            case 1:
+                UserBean userBean = (UserBean) bean;
+               /* if (userBean.getCode()!=0){
+                    ToastUtils.showShortToast(userBean.getMsg());
+                }*/
+                ToastUtils.showShortToast(userBean.getMsg());
+                break;
+        }
     }
 
     @Override
@@ -36,7 +53,51 @@ public class LoginModel extends BaseModel<ActivityLoginBinding, LoginBizImpl> {
      * 登录
      */
     public void login() {
+        String phone = phoneReg();
+        String passWord = passWordReg();
+        if (phone == "" | passWord == "") {
+            return;
+        }
+        Map<String, String> map = new HashMap<>();
+        map.put("user_phone", phone);
+        map.put("user_password", passWord);
+        mBiz.login(this, map);
+    }
 
+    /**
+     * 手机号验证
+     *
+     * @return 手机号
+     */
+    private String phoneReg() {
+
+        String phone = mBinder.editPhoneLogin.getText().toString().trim();
+
+        if (StringUtils.isEmpty(phone)) {
+            ToastUtils.showShortToast("您输入的手机号为空");
+        } else if (!RegexUtils.isMobileExact(phone)) {
+            ToastUtils.showShortToast("您输入的手机号格式不正确");
+        } else {
+            return phone;
+        }
+        return "";
+    }
+
+    /**
+     * 第一次密码验证
+     *
+     * @return 密码
+     */
+    private String passWordReg() {
+        String pwd = mBinder.etPasswordLogin.getText().toString().trim();
+        if (StringUtils.isEmpty(pwd)) {
+            ToastUtils.showShortToast("您输入的密码空");
+        } else if (pwd.length() < 6 || pwd.length() > 12) {
+            ToastUtils.showShortToast("密码在6-12位之间");
+        } else {
+            return pwd;
+        }
+        return "";
     }
 
 

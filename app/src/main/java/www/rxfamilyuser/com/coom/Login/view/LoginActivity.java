@@ -32,7 +32,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginModel
 
     //登录
     public void btnLoginOrRegister(View view) {
-
+        mModel.login();
     }
 
     //注册

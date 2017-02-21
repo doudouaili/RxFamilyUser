@@ -15,4 +15,12 @@ public interface RegisterBiz {
      * @param map 参数
      */
     void register(RequestCallBack callBack, Map<String, String> map);
+
+    /**
+     * 找回密码
+     * @param callBack 回调
+     * @param map 参数
+     */
+    void findPassWord(RequestCallBack callBack, Map<String, String> map);
+
 }

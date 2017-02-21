@@ -49,17 +49,35 @@ public class RegisterModel extends BaseModel<ActivityRegisterBinding, RegisterBi
 
     @Override
     public void onSuccess(Object bean, int tag) {
-        UserBean userBean = (UserBean) bean;
-        if (userBean.getCode() == 1) {
-            Intent intent = new Intent(getContent(), MainActivity.class);
-            getContent().startActivity(intent);
-            ToastUtils.showShortToast(userBean.getMsg());
-            activity.finish();
-            AppManagerUtils.getActivity(LoginActivity.class).finish();
+        switch (tag) {
+            case 1:
+                UserBean userBean = (UserBean) bean;
+                if (userBean.getCode() == 1) {
+                    Intent intent = new Intent(getContent(), MainActivity.class);
+                    getContent().startActivity(intent);
+                    ToastUtils.showShortToast(userBean.getMsg());
+                    activity.finish();
+                    AppManagerUtils.getActivity(LoginActivity.class).finish();
 
-        } else {
-            ToastUtils.showShortToast(userBean.getMsg());
+                } else {
+                    ToastUtils.showShortToast(userBean.getMsg());
+                }
+                break;
+            case 2:
+                UserBean userB = (UserBean) bean;
+                if (userB.getCode() == 1) {
+                    Intent intent = new Intent(getContent(), MainActivity.class);
+                    getContent().startActivity(intent);
+                    ToastUtils.showShortToast(userB.getMsg());
+                    activity.finish();
+                    AppManagerUtils.getActivity(LoginActivity.class).finish();
+
+                } else {
+                    ToastUtils.showShortToast(userB.getMsg());
+                }
+                break;
         }
+
     }
 
     @Override
@@ -190,24 +208,32 @@ public class RegisterModel extends BaseModel<ActivityRegisterBinding, RegisterBi
         map.put("user_password", psw);
         map.put("user_code", code);
         map.put("user_phone", phone);
-
-
         mBiz.register(this, map);
     }
 
     /**
-     * 登录
+     * 找回密码
      */
-    public void login() {
+    public void findPassWord() {
 
         String phone = phoneReg();
         String code = codeReg();
         String psw = passWordReg();
         String againPaw = againPassWordReg();
-        if (psw.equals(againPaw)) {
+        if (!psw.equals(againPaw)) {
             ToastUtils.showShortToast("您输入的两次密码不一致");
             return;
         }
+        if (phone == "" | code == "" | psw == "" | againPaw == "") {
+            return;
+        }
+        Map<String, String> map = new HashMap<>();
+        map.put("user_password", psw);
+        map.put("user_code", code);
+        map.put("user_phone", phone);
+        mBiz.findPassWord(this, map);
+
+
     }
 
     /**

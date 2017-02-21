@@ -133,7 +133,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
     }
 
     /**
-     * 注册/登录
+     * 注册/找回密码
      *
      * @param view
      */
@@ -143,7 +143,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
                 mModel.register();
                 break;
             case 2:
-                mModel.login();
+                mModel.findPassWord();
                 break;
         }
     }

@@ -9,6 +9,10 @@ import www.rxfamilyuser.com.network.RequestCallBack;
  */
 
 public interface LoginBiz {
-
-    void register(RequestCallBack callBack, Map<String, String> map);
+    /**
+     * 注册
+     * @param callBack
+     * @param map
+     */
+    void login(RequestCallBack callBack, Map<String, String> map);
 }

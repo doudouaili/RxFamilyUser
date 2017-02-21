@@ -39,4 +39,14 @@ public class HttpRequestImpl implements HttpRequest {
     public Observable<UserBean> register(Map<String, String> map) {
         return RetrofitManager.getInstance().getAppService().register(getCacheControl(), map);
     }
+
+    @Override
+    public Observable<UserBean> findPassWord(Map<String, String> map) {
+          return RetrofitManager.getInstance().getAppService().findPassWord(getCacheControl(), map);
+    }
+
+    @Override
+    public Observable<UserBean> login(Map<String, String> map) {
+        return RetrofitManager.getInstance().getAppService().login(getCacheControl(), map);
+    }
 }

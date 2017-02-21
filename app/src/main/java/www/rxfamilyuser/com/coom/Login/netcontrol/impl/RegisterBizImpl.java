@@ -31,7 +31,35 @@ public class RegisterBizImpl extends BaseBiz implements RegisterBiz {
 
                     @Override
                     public void onNext(UserBean value) {
-                        callBack.success(value, 0);
+                        callBack.success(value, 1);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callBack.error(e.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void findPassWord(final RequestCallBack callBack, Map<String, String> map) {
+        HttpRequestImpl.getInstance().findPassWord(map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<UserBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        mDisposable = d;
+                    }
+
+                    @Override
+                    public void onNext(UserBean value) {
+                        callBack.success(value, 2);
                     }
 
                     @Override

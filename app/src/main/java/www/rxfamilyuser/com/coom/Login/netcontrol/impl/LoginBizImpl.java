@@ -19,8 +19,8 @@ import www.rxfamilyuser.com.network.RequestCallBack;
 public class LoginBizImpl extends BaseBiz implements LoginBiz {
 
     @Override
-    public void register(final RequestCallBack callBack, Map<String, String> map) {
-        HttpRequestImpl.getInstance().register(map)
+    public void login(final RequestCallBack callBack, Map<String, String> map) {
+        HttpRequestImpl.getInstance().login(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<UserBean>() {
@@ -31,7 +31,7 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 
                     @Override
                     public void onNext(UserBean value) {
-                        callBack.success(value, 0);
+                        callBack.success(value, 1);
                     }
 
                     @Override

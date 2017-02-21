@@ -4,6 +4,8 @@ import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.ViewDataBinding;
 
+import com.blankj.utilcode.utils.ToastUtils;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
@@ -76,6 +78,7 @@ public abstract class BaseModel<T extends ViewDataBinding, M extends BaseBiz> ex
     @Override
     public void error(String errorMsg) {
         onError(errorMsg);
+        ToastUtils.showShortToast("网络连接异常!");
     }
 
 

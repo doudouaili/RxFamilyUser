@@ -27,4 +27,26 @@ public interface AppService {
     @POST("TomcatTest/DisplayHeader")
     Observable<UserBean> register(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, String> map);
 
+    /**
+     * 找回密码
+     *
+     * @param cacheControl
+     * @param map
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("TomcatTest/FindPas")
+    Observable<UserBean> findPassWord(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, String> map);
+
+    /**
+     * 登录
+     *
+     * @param cacheControl
+     * @param map
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("TomcatTest/Login")
+    Observable<UserBean> login(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, String> map);
+
 }

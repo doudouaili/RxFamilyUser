@@ -36,7 +36,8 @@ public class RetrofitManager {
     static {
         if (DebugMode) {
             //192.168.1.102
-            HTTP_URL = "http://192.168.1.102:8080/";
+            //192.168.1.133
+            HTTP_URL = "http://192.168.1.133:8080/";
         }
     }
 
