@@ -11,6 +11,7 @@ import com.zhy.autolayout.AutoLayoutActivity;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+import www.rxfamilyuser.com.R;
 import www.rxfamilyuser.com.util.AppManagerUtils;
 
 public abstract class BaseActivity<T extends ViewDataBinding, M extends BaseModel> extends AutoLayoutActivity {

@@ -1,6 +1,11 @@
 package www.rxfamilyuser.com.coom.Login.view;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.os.Build;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.blankj.utilcode.utils.ToastUtils;
 
@@ -105,7 +110,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
 
     @Override
     public void onBackPressed() {
-        mModel.showActivityExitAnimation();
+        showActivityExitAnimation();
     }
 
     @Override
@@ -129,7 +134,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
      * @param view
      */
     public void btnFinsh(View view) {
-        mModel.showActivityExitAnimation();
+        showActivityExitAnimation();
     }
 
     /**
@@ -145,6 +150,30 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
             case 2:
                 mModel.findPassWord();
                 break;
+        }
+    }
+
+    /**
+     * 结束动画
+     */
+    public void showActivityExitAnimation() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Animator animator = ViewAnimationUtils.createCircularReveal(mBinder.cvMain, mBinder.cvMain.getWidth() / 2, 0, mBinder.cvMain.getHeight(), mBinder.fabQuitRegister.getWidth() / 2);
+            animator.setDuration(500);
+            animator.setInterpolator(new AccelerateDecelerateInterpolator());
+            animator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mBinder.cvMain.setVisibility(View.GONE);
+                    super.onAnimationEnd(animation);
+                    mBinder.fabQuitRegister.setImageResource(R.mipmap.plus);
+                    RegisterActivity.super.onBackPressed();
+                }
+            });
+            animator.start();
+
+        } else {
+            super.onBackPressed();
         }
     }
 }

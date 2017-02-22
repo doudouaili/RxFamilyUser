@@ -12,7 +12,7 @@ public class GuildeModel extends BaseModel<ActivityGuideBinding, GuildeBiz> {
 
 
     @Override
-    public void onBeforeRequest() {
+    public void onBeforeRequest(int tag) {
 
     }
 

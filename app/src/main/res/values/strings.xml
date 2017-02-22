@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RxFamilyUser</string>
+    <string name="app_name">程序宝典</string>
     <string name="login">登录</string>
     <string name="register">注册</string>
     <string name="find_password">找回密码</string>
@@ -10,6 +10,8 @@
     <string name="automatic">自动登录</string>
     <string name="chick_login">点击登录</string>
     <string name="forget_password">忘记密码?</string>
+    <string name="load">加载中...</string>
+    <string name="versionhint">暂未实现此功能,敬请期待下一版本.</string>
 
     <string name="ed_username">请输入用户名</string>
     <string name="ed_two_password">再次输入密码</string>

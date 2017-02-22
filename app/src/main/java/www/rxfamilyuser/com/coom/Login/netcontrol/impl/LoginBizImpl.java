@@ -9,8 +9,8 @@ import io.reactivex.schedulers.Schedulers;
 import www.rxfamilyuser.com.base.BaseBiz;
 import www.rxfamilyuser.com.coom.Login.bean.UserBean;
 import www.rxfamilyuser.com.coom.Login.netcontrol.LoginBiz;
-import www.rxfamilyuser.com.network.request.HttpRequestImpl;
 import www.rxfamilyuser.com.network.RequestCallBack;
+import www.rxfamilyuser.com.network.request.HttpRequestImpl;
 
 /**
  * Created by ali on 2017/2/17.
@@ -19,7 +19,8 @@ import www.rxfamilyuser.com.network.RequestCallBack;
 public class LoginBizImpl extends BaseBiz implements LoginBiz {
 
     @Override
-    public void login(final RequestCallBack callBack, Map<String, String> map) {
+    public void login(final RequestCallBack callBack, Map<String, String> map, final int tag) {
+        callBack.beforeRequest(tag);
         HttpRequestImpl.getInstance().login(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -31,7 +32,7 @@ public class LoginBizImpl extends BaseBiz implements LoginBiz {
 
                     @Override
                     public void onNext(UserBean value) {
-                        callBack.success(value, 1);
+                        callBack.success(value, tag);
                     }
 
                     @Override

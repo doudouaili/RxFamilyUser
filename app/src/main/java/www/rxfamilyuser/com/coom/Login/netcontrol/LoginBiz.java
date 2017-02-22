@@ -13,6 +13,7 @@ public interface LoginBiz {
      * 注册
      * @param callBack
      * @param map
+     * @param tag
      */
-    void login(RequestCallBack callBack, Map<String, String> map);
+    void login(RequestCallBack callBack, Map<String, String> map,int tag);
 }

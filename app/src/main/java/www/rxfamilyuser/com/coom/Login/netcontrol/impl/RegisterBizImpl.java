@@ -19,7 +19,8 @@ import www.rxfamilyuser.com.network.request.HttpRequestImpl;
 public class RegisterBizImpl extends BaseBiz implements RegisterBiz {
 
     @Override
-    public void register(final RequestCallBack callBack, Map<String, String> map) {
+    public void register(final RequestCallBack callBack, Map<String, String> map, final int tag) {
+        callBack.beforeRequest(tag);
         HttpRequestImpl.getInstance().register(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -31,7 +32,7 @@ public class RegisterBizImpl extends BaseBiz implements RegisterBiz {
 
                     @Override
                     public void onNext(UserBean value) {
-                        callBack.success(value, 1);
+                        callBack.success(value, tag);
                     }
 
                     @Override
@@ -47,7 +48,8 @@ public class RegisterBizImpl extends BaseBiz implements RegisterBiz {
     }
 
     @Override
-    public void findPassWord(final RequestCallBack callBack, Map<String, String> map) {
+    public void findPassWord(final RequestCallBack callBack, Map<String, String> map, final int tag) {
+        callBack.beforeRequest(tag);
         HttpRequestImpl.getInstance().findPassWord(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -59,7 +61,7 @@ public class RegisterBizImpl extends BaseBiz implements RegisterBiz {
 
                     @Override
                     public void onNext(UserBean value) {
-                        callBack.success(value, 2);
+                        callBack.success(value, tag);
                     }
 
                     @Override

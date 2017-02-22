@@ -5,18 +5,22 @@ import android.content.Intent;
 import android.os.Build;
 
 import com.blankj.utilcode.utils.RegexUtils;
+import com.blankj.utilcode.utils.SPUtils;
 import com.blankj.utilcode.utils.StringUtils;
 import com.blankj.utilcode.utils.ToastUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import www.rxfamilyuser.com.base.BaseModel;
 import www.rxfamilyuser.com.coom.Login.bean.UserBean;
 import www.rxfamilyuser.com.coom.Login.netcontrol.impl.LoginBizImpl;
 import www.rxfamilyuser.com.coom.Login.view.LoginActivity;
+import www.rxfamilyuser.com.coom.Login.view.MainActivity;
 import www.rxfamilyuser.com.coom.Login.view.RegisterActivity;
 import www.rxfamilyuser.com.databinding.ActivityLoginBinding;
+import www.rxfamilyuser.com.util.ConstantUtil;
 
 /**
  * Created by ali on 2017/2/15.
@@ -26,19 +30,47 @@ public class LoginModel extends BaseModel<ActivityLoginBinding, LoginBizImpl> {
 
 
     @Override
-    public void onBeforeRequest() {
-
+    public void onBeforeRequest(int tag) {
+        mDialog.show();
     }
 
     @Override
     public void onSuccess(Object bean, int tag) {
+
         //做面显示或其他
         switch (tag) {
             case 1:
                 UserBean userBean = (UserBean) bean;
-               /* if (userBean.getCode()!=0){
+                if (userBean.getCode() != 0) {
+                    List<UserBean.User> users = userBean.getResult();
+                    SPUtils spUtils = new SPUtils(ConstantUtil.sSP_KEY);
+                    if (users != null) {
+                        spUtils.putBoolean("login", true);
+                        spUtils.putString("phone", users.get(0).getUser_phone());
+                        spUtils.putString("photo", users.get(0).getUser_photo());
+                    }
+                    //保存用户名
+                    boolean checked = mBinder.checkEnableLogin.isChecked();
+                    if (checked) {
+                        spUtils.putBoolean("saveuser", true);
+                    } else {
+                        spUtils.putBoolean("saveuser", false);
+                    }
+
+                    //自动登录
+                    boolean checked1 = mBinder.checkRememberPwd.isChecked();
+                    if (checked1) {
+                        spUtils.putBoolean("automaticlogin", true);
+                    } else {
+                        spUtils.putBoolean("automaticlogin", false);
+                    }
+
+                    Intent intent = new Intent(getContent(), MainActivity.class);
+                    getContent().startActivity(intent);
+                    mBaseActivity.finish();
+
                     ToastUtils.showShortToast(userBean.getMsg());
-                }*/
+                }
                 ToastUtils.showShortToast(userBean.getMsg());
                 break;
         }
@@ -53,15 +85,17 @@ public class LoginModel extends BaseModel<ActivityLoginBinding, LoginBizImpl> {
      * 登录
      */
     public void login() {
-        String phone = phoneReg();
         String passWord = passWordReg();
+
+        String phone = phoneReg();
+
         if (phone == "" | passWord == "") {
             return;
         }
         Map<String, String> map = new HashMap<>();
         map.put("user_phone", phone);
         map.put("user_password", passWord);
-        mBiz.login(this, map);
+        mBiz.login(this, map, 1);
     }
 
     /**
@@ -91,7 +125,7 @@ public class LoginModel extends BaseModel<ActivityLoginBinding, LoginBizImpl> {
     private String passWordReg() {
         String pwd = mBinder.etPasswordLogin.getText().toString().trim();
         if (StringUtils.isEmpty(pwd)) {
-            ToastUtils.showShortToast("您输入的密码空");
+            ToastUtils.showShortToast("您输入的密码为空");
         } else if (pwd.length() < 6 || pwd.length() > 12) {
             ToastUtils.showShortToast("密码在6-12位之间");
         } else {

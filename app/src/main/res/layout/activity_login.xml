@@ -155,6 +155,7 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:onClick="btnQQ"
                             android:id="@+id/image_qq"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -163,6 +164,7 @@
                             android:src="@mipmap/qq" />
 
                         <ImageView
+                            android:onClick="btnWX"
                             android:id="@+id/image_wx"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -170,6 +172,7 @@
                             android:src="@mipmap/weixin_login" />
 
                         <ImageView
+                            android:onClick="btnSia"
                             android:id="@+id/image_xl"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"

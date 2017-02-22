@@ -194,7 +194,6 @@
                             </android.support.design.widget.TextInputLayout>
                         </LinearLayout>
 
-
                         <Button
                             android:id="@+id/btn_register"
                             android:layout_width="300px"

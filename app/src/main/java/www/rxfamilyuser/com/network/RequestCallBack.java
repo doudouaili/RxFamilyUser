@@ -6,7 +6,7 @@ package www.rxfamilyuser.com.network;
 
 public interface RequestCallBack {
 
-    void beforeRequest();
+    void beforeRequest(int tag);
 
     void success(Object data, int tag);
 

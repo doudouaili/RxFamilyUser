@@ -12,10 +12,12 @@ import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.blankj.utilcode.utils.RegexUtils;
+import com.blankj.utilcode.utils.SPUtils;
 import com.blankj.utilcode.utils.StringUtils;
 import com.blankj.utilcode.utils.ToastUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import cn.smssdk.SMSSDK;
@@ -28,6 +30,7 @@ import www.rxfamilyuser.com.coom.Login.view.MainActivity;
 import www.rxfamilyuser.com.coom.Login.view.RegisterActivity;
 import www.rxfamilyuser.com.databinding.ActivityRegisterBinding;
 import www.rxfamilyuser.com.util.AppManagerUtils;
+import www.rxfamilyuser.com.util.ConstantUtil;
 
 /**
  * Created by ali on 2017/2/20.
@@ -43,8 +46,8 @@ public class RegisterModel extends BaseModel<ActivityRegisterBinding, RegisterBi
     }
 
     @Override
-    public void onBeforeRequest() {
-
+    public void onBeforeRequest(int tag) {
+        mDialog.show();
     }
 
     @Override
@@ -53,6 +56,14 @@ public class RegisterModel extends BaseModel<ActivityRegisterBinding, RegisterBi
             case 1:
                 UserBean userBean = (UserBean) bean;
                 if (userBean.getCode() == 1) {
+                    List<UserBean.User> users = userBean.getResult();
+                    if (users != null) {
+                        SPUtils spUtils = new SPUtils(ConstantUtil.sSP_KEY);
+                        spUtils.putBoolean("login", true);
+                        spUtils.putString("phone", users.get(0).getUser_phone());
+                        spUtils.putString("photo", users.get(0).getUser_photo());
+                    }
+
                     Intent intent = new Intent(getContent(), MainActivity.class);
                     getContent().startActivity(intent);
                     ToastUtils.showShortToast(userBean.getMsg());
@@ -63,21 +74,8 @@ public class RegisterModel extends BaseModel<ActivityRegisterBinding, RegisterBi
                     ToastUtils.showShortToast(userBean.getMsg());
                 }
                 break;
-            case 2:
-                UserBean userB = (UserBean) bean;
-                if (userB.getCode() == 1) {
-                    Intent intent = new Intent(getContent(), MainActivity.class);
-                    getContent().startActivity(intent);
-                    ToastUtils.showShortToast(userB.getMsg());
-                    activity.finish();
-                    AppManagerUtils.getActivity(LoginActivity.class).finish();
 
-                } else {
-                    ToastUtils.showShortToast(userB.getMsg());
-                }
-                break;
         }
-
     }
 
     @Override
@@ -141,29 +139,7 @@ public class RegisterModel extends BaseModel<ActivityRegisterBinding, RegisterBi
         }
     }
 
-    /**
-     * 结束动画
-     */
-    public void showActivityExitAnimation() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Animator animator = ViewAnimationUtils.createCircularReveal(mBinder.cvMain, mBinder.cvMain.getWidth() / 2, 0, mBinder.cvMain.getHeight(), mBinder.fabQuitRegister.getWidth() / 2);
-            animator.setDuration(500);
-            animator.setInterpolator(new AccelerateDecelerateInterpolator());
-            animator.addListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mBinder.cvMain.setVisibility(View.GONE);
-                    super.onAnimationEnd(animation);
-                    mBinder.fabQuitRegister.setImageResource(R.mipmap.plus);
-                    activity.finish();
-                }
-            });
-            animator.start();
 
-        } else {
-            activity.finish();
-        }
-    }
 
     /**
      * 获取验证码
@@ -188,50 +164,49 @@ public class RegisterModel extends BaseModel<ActivityRegisterBinding, RegisterBi
      * 注册
      */
     public void register() {
-
-        String phone = phoneReg();
-        String code = codeReg();
-        String psw = passWordReg();
-        String againPaw = againPassWordReg();
-        if (!psw.equals(againPaw)) {
-            ToastUtils.showShortToast("您输入的两次密码不一致");
-            return;
-        }
         String name = userNameReg();
+        String againPaw = againPassWordReg();
+        String psw = passWordReg();
+        String code = codeReg();
+        String phone = phoneReg();
 
         if (phone == "" | code == "" | psw == "" | againPaw == "" | name == "") {
             return;
         }
 
+        if (!psw.equals(againPaw)) {
+            ToastUtils.showShortToast("您输入的两次密码不一致");
+            return;
+        }
         Map<String, String> map = new HashMap<>();
         map.put("user_name", name);
         map.put("user_password", psw);
         map.put("user_code", code);
         map.put("user_phone", phone);
-        mBiz.register(this, map);
+        mBiz.register(this, map, 1);
     }
 
     /**
      * 找回密码
      */
     public void findPassWord() {
-
-        String phone = phoneReg();
-        String code = codeReg();
-        String psw = passWordReg();
         String againPaw = againPassWordReg();
+        String psw = passWordReg();
+        String code = codeReg();
+        String phone = phoneReg();
+        if (phone == "" | code == "" | psw == "" | againPaw == "") {
+            return;
+        }
         if (!psw.equals(againPaw)) {
             ToastUtils.showShortToast("您输入的两次密码不一致");
             return;
         }
-        if (phone == "" | code == "" | psw == "" | againPaw == "") {
-            return;
-        }
+
         Map<String, String> map = new HashMap<>();
         map.put("user_password", psw);
         map.put("user_code", code);
         map.put("user_phone", phone);
-        mBiz.findPassWord(this, map);
+        mBiz.findPassWord(this, map, 1);
 
 
     }

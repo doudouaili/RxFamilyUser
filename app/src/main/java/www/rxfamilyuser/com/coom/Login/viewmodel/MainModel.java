@@ -10,7 +10,7 @@ import www.rxfamilyuser.com.databinding.ActivityMainBinding;
 
 public class MainModel extends BaseModel<ActivityMainBinding,MainBizImpl> {
     @Override
-    public void onBeforeRequest() {
+    public void onBeforeRequest(int tag) {
 
     }
 

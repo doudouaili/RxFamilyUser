@@ -10,6 +10,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 import www.rxfamilyuser.com.network.RequestCallBack;
+import www.rxfamilyuser.com.util.DialogUtil;
 
 
 /**
@@ -22,9 +23,12 @@ public abstract class BaseModel<T extends ViewDataBinding, M extends BaseBiz> ex
     protected T mBinder = null;
     protected M mBiz = null;
 
+    public DialogUtil mDialog;
+
     public void setView(BaseActivity activity) {
         mBaseActivity = activity;
         mBinder = (T) activity.getBinder();
+        mDialog = new DialogUtil(activity);
 
         Type genType = getClass().getGenericSuperclass();
         Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
@@ -62,21 +66,24 @@ public abstract class BaseModel<T extends ViewDataBinding, M extends BaseBiz> ex
     @Override
     public void onDestroy() {
         mBiz.disposableCancel();
+        mDialog.dismiss();
     }
 
 
     @Override
-    public void beforeRequest() {
-        onBeforeRequest();
+    public void beforeRequest(int tag) {
+        onBeforeRequest( tag);
     }
 
     @Override
     public void success(Object data, int tag) {
+        mDialog.dismiss();
         onSuccess(data, tag);
     }
 
     @Override
     public void error(String errorMsg) {
+        mDialog.dismiss();
         onError(errorMsg);
         ToastUtils.showShortToast("网络连接异常!");
     }
@@ -85,7 +92,7 @@ public abstract class BaseModel<T extends ViewDataBinding, M extends BaseBiz> ex
     /**
      * 请求开始
      */
-    public abstract void onBeforeRequest();
+    public abstract void onBeforeRequest(int tag);
 
     /**
      * 请求成功

@@ -2,10 +2,14 @@ package www.rxfamilyuser.com.coom.Login.view;
 
 import android.view.View;
 
+import com.blankj.utilcode.utils.SPUtils;
+import com.blankj.utilcode.utils.ToastUtils;
+
 import www.rxfamilyuser.com.R;
 import www.rxfamilyuser.com.base.BaseActivity;
 import www.rxfamilyuser.com.coom.Login.viewmodel.LoginModel;
 import www.rxfamilyuser.com.databinding.ActivityLoginBinding;
+import www.rxfamilyuser.com.util.ConstantUtil;
 import www.rxfamilyuser.com.util.TitleBuilderUtils;
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginModel> {
@@ -28,6 +32,13 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginModel
                     }
                 });
         mBinder.setLog(mModel);
+
+        //是否要求保存用户名
+        SPUtils spUtils = new SPUtils(ConstantUtil.sSP_KEY);
+        if (spUtils.getBoolean("saveuser")) {
+            String phone = spUtils.getString("phone");
+            mBinder.editPhoneLogin.setText(phone);
+        }
     }
 
     //登录
@@ -45,5 +56,20 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginModel
         mModel.intentRegis(2);
     }
 
+
+    //QQ
+    public void btnQQ(View view) {
+        ToastUtils.showShortToast(R.string.versionhint);
+    }
+
+    //微信
+    public void btnWX(View view) {
+        ToastUtils.showShortToast(R.string.versionhint);
+    }
+
+    //新浪
+    public void btnSia(View view) {
+        ToastUtils.showShortToast(R.string.versionhint);
+    }
 
 }

@@ -11,16 +11,20 @@ import www.rxfamilyuser.com.network.RequestCallBack;
 public interface RegisterBiz {
     /**
      * 注册
+     *
      * @param callBack 回调
-     * @param map 参数
+     * @param map      参数
+     * @param tag
      */
-    void register(RequestCallBack callBack, Map<String, String> map);
+    void register(RequestCallBack callBack, Map<String, String> map, int tag);
 
     /**
      * 找回密码
+     *
      * @param callBack 回调
-     * @param map 参数
+     * @param map      参数
+     * @param tag
      */
-    void findPassWord(RequestCallBack callBack, Map<String, String> map);
+    void findPassWord(RequestCallBack callBack, Map<String, String> map, int tag);
 
 }

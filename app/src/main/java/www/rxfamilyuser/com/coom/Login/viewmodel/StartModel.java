@@ -10,7 +10,7 @@ import www.rxfamilyuser.com.databinding.ActivityStartBinding;
 
 public class StartModel extends BaseModel<ActivityStartBinding,StartBizImpl> {
     @Override
-    public void onBeforeRequest() {
+    public void onBeforeRequest(int tag) {
 
     }
 
