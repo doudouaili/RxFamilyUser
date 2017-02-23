@@ -8,7 +8,7 @@ import www.rxfamilyuser.com.network.RequestCallBack;
  * Created by ali on 2017/2/17.
  */
 
-public interface LoginBiz {
+public interface ILoginControl {
     /**
      * 注册
      * @param callBack

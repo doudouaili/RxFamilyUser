@@ -17,30 +17,29 @@ import www.rxfamilyuser.com.util.DialogUtil;
  * Created by ali on 2017/2/15.
  */
 
-public abstract class BaseModel<T extends ViewDataBinding, M extends BaseBiz> extends BaseObservable implements ModelImpl, RequestCallBack {
+public abstract class BaseModel<T extends ViewDataBinding, M extends IBaseControl> extends BaseObservable implements IModel, RequestCallBack {
 
-    protected BaseActivity mBaseActivity = null;
+    protected IModelActivitiy UI = null;
     protected T mBinder = null;
-    protected M mBiz = null;
+    protected M mControl = null;
 
     public DialogUtil mDialog;
 
-    public void setView(BaseActivity activity) {
-        mBaseActivity = activity;
-        mBinder = (T) activity.getBinder();
-        mDialog = new DialogUtil(activity);
+    public void setView(IModelActivitiy activity) {
+        UI = activity;
+        mBinder = (T) UI.getBinder();
+        mDialog = new DialogUtil(UI.getConText());
 
         Type genType = getClass().getGenericSuperclass();
         Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
         Class<M> bizClass = (Class) params[1];
         try {
-            mBiz = bizClass.newInstance();
+            mControl = bizClass.newInstance();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -65,14 +64,14 @@ public abstract class BaseModel<T extends ViewDataBinding, M extends BaseBiz> ex
 
     @Override
     public void onDestroy() {
-        mBiz.disposableCancel();
+        mControl.disposableCancel();
         mDialog.dismiss();
     }
 
 
     @Override
     public void beforeRequest(int tag) {
-        onBeforeRequest( tag);
+        onBeforeRequest(tag);
     }
 
     @Override
@@ -108,7 +107,7 @@ public abstract class BaseModel<T extends ViewDataBinding, M extends BaseBiz> ex
     public abstract void onError(String errorMsg);
 
     public Context getContent() {
-        return mBaseActivity.getApplication();
+        return UI.getConText();
     }
 
 }

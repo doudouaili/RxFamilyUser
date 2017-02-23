@@ -6,9 +6,9 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import www.rxfamilyuser.com.base.BaseBiz;
+import www.rxfamilyuser.com.base.BaseNetControl;
 import www.rxfamilyuser.com.coom.Login.bean.UserBean;
-import www.rxfamilyuser.com.coom.Login.netcontrol.RegisterBiz;
+import www.rxfamilyuser.com.coom.Login.netcontrol.IRegisterControl;
 import www.rxfamilyuser.com.network.RequestCallBack;
 import www.rxfamilyuser.com.network.request.HttpRequestImpl;
 
@@ -16,7 +16,7 @@ import www.rxfamilyuser.com.network.request.HttpRequestImpl;
  * Created by ali on 2017/2/20.
  */
 
-public class RegisterBizImpl extends BaseBiz implements RegisterBiz {
+public class IRegisterControlImpl extends BaseNetControl implements IRegisterControl {
 
     @Override
     public void register(final RequestCallBack callBack, Map<String, String> map, final int tag) {

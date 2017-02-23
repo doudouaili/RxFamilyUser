@@ -15,18 +15,19 @@ import java.util.Map;
 
 import www.rxfamilyuser.com.base.BaseModel;
 import www.rxfamilyuser.com.coom.Login.bean.UserBean;
-import www.rxfamilyuser.com.coom.Login.netcontrol.impl.LoginBizImpl;
+import www.rxfamilyuser.com.coom.Login.netcontrol.impl.ILoginControlImpl;
 import www.rxfamilyuser.com.coom.Login.view.LoginActivity;
 import www.rxfamilyuser.com.coom.Login.view.MainActivity;
 import www.rxfamilyuser.com.coom.Login.view.RegisterActivity;
 import www.rxfamilyuser.com.databinding.ActivityLoginBinding;
+import www.rxfamilyuser.com.util.AppManagerUtils;
 import www.rxfamilyuser.com.util.ConstantUtil;
 
 /**
  * Created by ali on 2017/2/15.
  */
 
-public class LoginModel extends BaseModel<ActivityLoginBinding, LoginBizImpl> {
+public class LoginModel extends BaseModel<ActivityLoginBinding, ILoginControlImpl> {
 
 
     @Override
@@ -67,7 +68,7 @@ public class LoginModel extends BaseModel<ActivityLoginBinding, LoginBizImpl> {
 
                     Intent intent = new Intent(getContent(), MainActivity.class);
                     getContent().startActivity(intent);
-                    mBaseActivity.finish();
+                    AppManagerUtils.getAppManager().finishActivity(LoginActivity.class);
 
                     ToastUtils.showShortToast(userBean.getMsg());
                 }
@@ -95,7 +96,7 @@ public class LoginModel extends BaseModel<ActivityLoginBinding, LoginBizImpl> {
         Map<String, String> map = new HashMap<>();
         map.put("user_phone", phone);
         map.put("user_password", passWord);
-        mBiz.login(this, map, 1);
+        mControl.login(this, map, 1);
     }
 
     /**
@@ -141,19 +142,18 @@ public class LoginModel extends BaseModel<ActivityLoginBinding, LoginBizImpl> {
      * @param type 1:注册;2:找回密码
      */
     public void intentRegis(int type) {
-
+        LoginActivity loginActivity = (LoginActivity) UI;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mBaseActivity.getWindow().setEnterTransition(null);
-            mBaseActivity.getWindow().setExitTransition(null);
-            LoginActivity loginActivity = (LoginActivity) mBaseActivity;
+            loginActivity.getWindow().setEnterTransition(null);
+            loginActivity.getWindow().setExitTransition(null);
             ActivityOptions op = ActivityOptions.makeSceneTransitionAnimation(loginActivity, mBinder.fabRegisterLogin, mBinder.fabRegisterLogin.getTransitionName());
-            Intent intent = new Intent(mBaseActivity.getApplicationContext(), RegisterActivity.class);
+            Intent intent = new Intent(getContent(), RegisterActivity.class);
             intent.putExtra("type", type);
             loginActivity.startActivity(intent, op.toBundle());
         } else {
-            Intent intent = new Intent(mBaseActivity.getApplicationContext(), RegisterActivity.class);
+            Intent intent = new Intent(getContent(), RegisterActivity.class);
             intent.putExtra("type", type);
-            mBaseActivity.startActivity(intent);
+            loginActivity.startActivity(intent);
         }
     }
 }

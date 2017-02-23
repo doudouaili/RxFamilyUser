@@ -1,7 +1,7 @@
 package www.rxfamilyuser.com.util;
 
-import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -15,7 +15,7 @@ public class DialogUtil {
     private Dialog pd; //Dialog对象
 
 
-    public DialogUtil(Activity context) {
+    public DialogUtil(Context context) {
         pd = new Dialog(context, R.style.dialog);
         View view = LayoutInflater.from(context).inflate(
                 R.layout.progressbar, null);

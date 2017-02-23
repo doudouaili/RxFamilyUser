@@ -1,45 +1,59 @@
 package www.rxfamilyuser.com.base;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
-
-import com.zhy.autolayout.AutoLayoutActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-import www.rxfamilyuser.com.util.AppManagerUtils;
+/**
+ * Created by ali on 2017/2/23.
+ */
 
-public abstract class BaseActivity<T extends ViewDataBinding, M extends BaseModel> extends AutoLayoutActivity implements IModelActivitiy<T> {
-
+public abstract class BaseFragment<T extends ViewDataBinding, M extends BaseModel> extends Fragment implements IModelActivitiy<T> {
     public T mBinder = null;//binder
     public M mModel = null;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinder = DataBindingUtil.setContentView(this, getLayoutId());
-        AppManagerUtils.getAppManager().addActivity(this);
         Type genType = getClass().getGenericSuperclass();
         Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
         Class<M> bizClass = (Class) params[1];
         try {
             mModel = bizClass.newInstance();
-        } catch (InstantiationException e) {
+        } catch (java.lang.InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinder = DataBindingUtil.inflate(LayoutInflater.from(getActivity()), getLayoutId(), null, false);
         mModel.setView(this);
         mModel.onCreate();
         initView();
+        return mBinder.getRoot();
     }
 
     public abstract int getLayoutId();
+
+    public abstract void initView();
+
+    @Override
+    public Context getConText() {
+        return this.getContext();
+    }
 
     @Override
     public T getBinder() {
@@ -47,50 +61,28 @@ public abstract class BaseActivity<T extends ViewDataBinding, M extends BaseMode
     }
 
     @Override
-    public Context getConText() {
-        return this.getApplication();
-    }
-
-    /**
-     * 初始化 视图
-     */
-    public abstract void initView();
-
-
-    @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         mModel.onStart();
     }
 
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         mModel.onResume();
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         mModel.onStop();
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         mModel.onDestroy();
-        AppManagerUtils.getAppManager().finishActivity(this);
-    }
-
-    /**
-     * 跳转activity
-     *
-     * @param tarActivity 指定的activity
-     */
-    public void intent2Activity(Class<? extends Activity> tarActivity) {
-        Intent intent = new Intent(getApplicationContext(), tarActivity);
-        startActivity(intent);
     }
 
 }

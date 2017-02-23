@@ -8,7 +8,7 @@ import www.rxfamilyuser.com.network.RequestCallBack;
  * Created by ali on 2017/2/20.
  */
 
-public interface RegisterBiz {
+public interface IRegisterControl{
     /**
      * 注册
      *

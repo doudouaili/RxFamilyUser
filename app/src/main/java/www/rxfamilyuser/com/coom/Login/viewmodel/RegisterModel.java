@@ -24,7 +24,7 @@ import cn.smssdk.SMSSDK;
 import www.rxfamilyuser.com.R;
 import www.rxfamilyuser.com.base.BaseModel;
 import www.rxfamilyuser.com.coom.Login.bean.UserBean;
-import www.rxfamilyuser.com.coom.Login.netcontrol.impl.RegisterBizImpl;
+import www.rxfamilyuser.com.coom.Login.netcontrol.impl.IRegisterControlImpl;
 import www.rxfamilyuser.com.coom.Login.view.LoginActivity;
 import www.rxfamilyuser.com.coom.Login.view.MainActivity;
 import www.rxfamilyuser.com.coom.Login.view.RegisterActivity;
@@ -36,13 +36,13 @@ import www.rxfamilyuser.com.util.ConstantUtil;
  * Created by ali on 2017/2/20.
  */
 
-public class RegisterModel extends BaseModel<ActivityRegisterBinding, RegisterBizImpl> {
+public class RegisterModel extends BaseModel<ActivityRegisterBinding, IRegisterControlImpl> {
     RegisterActivity activity;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        activity = (RegisterActivity) mBaseActivity;
+        activity = (RegisterActivity) UI;
     }
 
     @Override
@@ -140,7 +140,6 @@ public class RegisterModel extends BaseModel<ActivityRegisterBinding, RegisterBi
     }
 
 
-
     /**
      * 获取验证码
      */
@@ -158,6 +157,7 @@ public class RegisterModel extends BaseModel<ActivityRegisterBinding, RegisterBi
         } else {
             ToastUtils.showShortToast("您输入的手机号格式不正确");
         }
+
     }
 
     /**
@@ -183,7 +183,7 @@ public class RegisterModel extends BaseModel<ActivityRegisterBinding, RegisterBi
         map.put("user_password", psw);
         map.put("user_code", code);
         map.put("user_phone", phone);
-        mBiz.register(this, map, 1);
+        mControl.register(this, map, 1);
     }
 
     /**
@@ -206,7 +206,7 @@ public class RegisterModel extends BaseModel<ActivityRegisterBinding, RegisterBi
         map.put("user_password", psw);
         map.put("user_code", code);
         map.put("user_phone", phone);
-        mBiz.findPassWord(this, map, 1);
+        mControl.findPassWord(this, map, 1);
 
 
     }
@@ -316,14 +316,14 @@ public class RegisterModel extends BaseModel<ActivityRegisterBinding, RegisterBi
         public void onTick(long millisUntilFinished) {
             mBinder.btnCode.setClickable(false);
             mBinder.btnCode.setText(millisUntilFinished / 1000 + "s");
-            mBinder.btnCode.setTextColor(mBaseActivity.getResources().getColor(R.color.test_head_color));
+            mBinder.btnCode.setTextColor(activity.getResources().getColor(R.color.test_head_color));
         }
 
         @Override
         public void onFinish() {
             mBinder.btnCode.setText("重新获取");
             mBinder.btnCode.setClickable(true);
-            mBinder.btnCode.setTextColor(mBaseActivity.getResources().getColor(R.color.login_view));
+            mBinder.btnCode.setTextColor(activity.getResources().getColor(R.color.login_view));
         }
     }
 
