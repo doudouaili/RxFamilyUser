@@ -1,25 +1,19 @@
 package www.rxfamilyuser.com.coom.Login.view;
 
-import android.databinding.DataBindingUtil;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
+import android.widget.RadioGroup;
 
-import com.blankj.utilcode.utils.SPUtils;
+import com.blankj.utilcode.utils.ToastUtils;
 
 import www.rxfamilyuser.com.R;
 import www.rxfamilyuser.com.base.BaseActivity;
 import www.rxfamilyuser.com.coom.Login.viewmodel.MainModel;
-import www.rxfamilyuser.com.coom.sidebar.view.PersonageActivity;
 import www.rxfamilyuser.com.databinding.ActivityMainBinding;
-import www.rxfamilyuser.com.databinding.NavHeaderBinding;
-import www.rxfamilyuser.com.util.ConstantUtil;
+import www.rxfamilyuser.com.util.AppManagerUtils;
 
-public class MainActivity extends BaseActivity<ActivityMainBinding, MainModel> implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity<ActivityMainBinding, MainModel> implements  RadioGroup.OnCheckedChangeListener {
+    //返回键点击时间
+    private long mExitTime = 0;
 
     @Override
     public int getLayoutId() {
@@ -28,87 +22,42 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainModel> i
 
     @Override
     public void initView() {
+
         mBinder.setMain(mModel);
 
-       /* ArrayList<Fragment> fragmentsList = mMainViewModel.addListFragment();
-        MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager(), fragmentsList);
-        binder.viewPager.setAdapter(mainViewPagerAdapter);
-        binder.viewPager.setOffscreenPageLimit(2);
-        binder.rg.setOnCheckedChangeListener(this);*/
+        mModel.initViewPager();
 
-        setSupportActionBar(mBinder.toolbar);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, mBinder.drawerLayout, mBinder.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        mBinder.drawerLayout.setDrawerListener(toggle);
-        toggle.syncState();
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        mBinder.rg.setOnCheckedChangeListener(this);
 
-
-        //侧边栏头布局
-        View headview = navigationView.inflateHeaderView(R.layout.nav_header);
-
-        NavHeaderBinding headerBinding = DataBindingUtil.bind(headview);
-
-        headerBinding.ivUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (!new SPUtils(ConstantUtil.sSP_KEY).getBoolean("login")) {
-                    intent2Activity(LoginActivity.class);
-                } else {
-                    intent2Activity(PersonageActivity.class);
-                }
-            }
-        });
-
-    }
-
-
-
-   /* @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        switch (checkedId) {
-            case R.id.rb_home:
-                binder.viewPager.setCurrentItem(0, false);
-                break;
-            case R.id.rb_live:
-                binder.viewPager.setCurrentItem(1, false);
-                break;
-            case R.id.rb_center:
-                binder.viewPager.setCurrentItem(2, false);
-                break;
-        }
-    }*/
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        mBinder.drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     @Override
     public void onBackPressed() {
-        if (mBinder.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            mBinder.drawerLayout.closeDrawer(GravityCompat.START);
+
+        if (System.currentTimeMillis() - mExitTime > 2000) {
+            mExitTime = System.currentTimeMillis();
+            ToastUtils.showShortToast(R.string.edit_name);
         } else {
-            super.onBackPressed();
+            AppManagerUtils.getAppManager().AppExit(getApplicationContext());
+        }
+    }
+
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        switch (checkedId) {
+            case R.id.rb_home:
+                mModel.setCurrentItem(0);
+                break;
+            case R.id.rb_live:
+                mModel.setCurrentItem(1);
+                break;
+            case R.id.rb_center:
+                mModel.setCurrentItem(2);
+                break;
+            case R.id.rb_my:
+                mModel.setCurrentItem(3);
+                break;
         }
     }
 
@@ -118,14 +67,90 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainModel> i
         return true;
     }
 
+
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+    protected void onResume() {
+        super.onResume();
+        setGuideView();
+    }
 
-        if (id == R.id.action_settings) {
-            return true;
-        }
+    /**
+     * 显示引导图
+     */
+    private void setGuideView() {
 
-        return super.onOptionsItemSelected(item);
+      /*   // 使用图片
+        final ImageView iv = new ImageView(this);
+        iv.setImageResource(R.drawable.img_new_task_guide);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        iv.setLayoutParams(params);
+
+        // 使用文字
+        TextView tv = new TextView(this);
+        tv.setText("欢迎使用");
+        tv.setTextColor(getResources().getColor(R.color.white));
+        tv.setTextSize(30);
+        tv.setGravity(Gravity.CENTER);
+
+        // 使用文字
+        final TextView tv2 = new TextView(this);
+        tv2.setText("欢迎使用2");
+        tv2.setTextColor(getResources().getColor(R.color.white));
+        tv2.setTextSize(30);
+        tv2.setGravity(Gravity.CENTER);
+
+
+        guideView = GuideView.Builder
+                .newInstance(this)
+                .setTargetView(menu)//设置目标
+                .setCustomGuideView(iv)
+                .setDirction(GuideView.Direction.LEFT_BOTTOM)
+                .setShape(GuideView.MyShape.CIRCULAR)   // 设置圆形显示区域，
+                .setBgColor(getResources().getColor(R.color.shadow))
+                .setOnclickListener(new GuideView.OnClickCallback() {
+                    @Override
+                    public void onClickedGuideView() {
+                        guideView.hide();
+                        guideView2.show();
+                    }
+                })
+                .build();
+
+
+        guideView2 = GuideView.Builder
+                .newInstance(this)
+                .setTargetView(btnTest)
+                .setCustomGuideView(tv)
+                .setDirction(GuideView.Direction.LEFT_BOTTOM)
+                .setShape(GuideView.MyShape.ELLIPSE)   // 设置椭圆形显示区域，
+                .setBgColor(getResources().getColor(R.color.shadow))
+                .setOnclickListener(new GuideView.OnClickCallback() {
+                    @Override
+                    public void onClickedGuideView() {
+                        guideView2.hide();
+                        guideView3.show();
+                    }
+                })
+                .build();
+
+
+        guideView3 = GuideView.Builder
+                .newInstance(this)
+                .setTargetView(btnTest2)
+                .setCustomGuideView(tv2)
+                .setDirction(GuideView.Direction.LEFT_BOTTOM)
+                .setShape(GuideView.MyShape.RECTANGULAR)   // 设置矩形显示区域，
+                .setRadius(80)          // 设置圆形或矩形透明区域半径，默认是targetView的显示矩形的半径，如果是矩形，这里是设置矩形圆角大小
+                .setBgColor(getResources().getColor(R.color.shadow))
+                .setOnclickListener(new GuideView.OnClickCallback() {
+                    @Override
+                    public void onClickedGuideView() {
+                        guideView3.hide();
+                        guideView.show();
+                    }
+                })
+                .build();
+
+        guideView.show();*/
     }
 }

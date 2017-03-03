@@ -11,6 +11,7 @@ import www.rxfamilyuser.com.base.BaseActivity;
 import www.rxfamilyuser.com.coom.Login.viewmodel.StartModel;
 import www.rxfamilyuser.com.databinding.ActivityStartBinding;
 import www.rxfamilyuser.com.util.ConstantUtil;
+import www.rxfamilyuser.com.util.SPkeyConstantUtil;
 
 public class StartActivity extends BaseActivity<ActivityStartBinding, StartModel> {
 
@@ -36,9 +37,9 @@ public class StartActivity extends BaseActivity<ActivityStartBinding, StartModel
 
     private void jumpNextPage() {
         SPUtils spUtils = new SPUtils(ConstantUtil.sSP_KEY);
-        if (!spUtils.getBoolean("initialize")) {
+        if (!spUtils.getBoolean(SPkeyConstantUtil.sInitialize)) {
             intent2Activity(GuideActivity.class);
-            spUtils.putBoolean("initialize", true);
+            spUtils.putBoolean(SPkeyConstantUtil.sInitialize, true);
             finish();
         } else {
             intent2Activity(MainActivity.class);

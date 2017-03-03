@@ -35,6 +35,4 @@ public class ConstantUtil {
      * SharedPreferences的key
      */
     public static final String sSP_KEY = "configuration";
-
-
 }

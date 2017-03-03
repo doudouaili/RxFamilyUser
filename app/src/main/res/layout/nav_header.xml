@@ -9,12 +9,13 @@
         android:orientation="vertical"
         android:padding="32px">
 
-        <ImageView
+        <www.rxfamilyuser.com.widget.CircleImageView
             android:id="@+id/iv_user"
             android:layout_width="140px"
             android:layout_height="140px"
             android:layout_gravity="center"
-            android:src="@mipmap/ic_launcher" />
+            android:onClick="logins"
+            android:src="@mipmap/default_user" />
 
         <TextView
             android:layout_width="wrap_content"

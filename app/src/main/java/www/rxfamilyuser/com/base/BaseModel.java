@@ -110,4 +110,5 @@ public abstract class BaseModel<T extends ViewDataBinding, M extends IBaseContro
         return UI.getConText();
     }
 
+
 }

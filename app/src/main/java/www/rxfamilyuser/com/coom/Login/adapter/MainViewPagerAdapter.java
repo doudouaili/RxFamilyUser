@@ -17,7 +17,6 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
     public MainViewPagerAdapter(FragmentManager supportFragmentManager, ArrayList<Fragment> fragmentsList) {
         super(supportFragmentManager);
         mFragmentsList = fragmentsList;
-
     }
 
     @Override

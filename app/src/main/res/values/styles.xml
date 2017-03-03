@@ -26,7 +26,7 @@
         <item name="android:button">@null</item>
         <item name="android:drawablePadding">6px</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@drawable/radiobutton_textcolor</item>
 
     </style>
 
@@ -55,6 +55,7 @@
         <item name="android:textSize">@dimen/_px30</item>
 
     </style>
+
     <style name="reg_edit">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -83,5 +84,12 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="view_line">
+        <item name="android:background">@color/view_line</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+
     </style>
 </resources>

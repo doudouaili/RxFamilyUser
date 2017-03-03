@@ -7,5 +7,5 @@ import www.rxfamilyuser.com.coom.drycargo.netcontrol.IDryCargoControl;
  * Created by ali on 2017/2/23.
  */
 
-public class DryCargoControlControlImpl extends BaseNetControl implements IDryCargoControl {
+public class DryCargoControlImpl extends BaseNetControl implements IDryCargoControl {
 }

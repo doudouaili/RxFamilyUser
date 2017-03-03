@@ -12,6 +12,12 @@
     <color name="regihter_password">#2ea67f</color>
     <color name="test_head_color">#999999</color>
     <color name="huise">#cdcdcd</color>
+    <color name="view_line">#C2C2C2</color>
+    <color name="wx_line">#F9F9F9</color>
+    <color name="main_text">#929292</color>
+    <color name="transparent">#00000000</color>
+    <color name="shadow">#cc222222</color>
+
 
 
 </resources>
