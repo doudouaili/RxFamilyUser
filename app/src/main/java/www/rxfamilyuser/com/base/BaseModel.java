@@ -78,6 +78,7 @@ public abstract class BaseModel<T extends ViewDataBinding, M extends IBaseContro
     public void success(Object data, int tag) {
         mDialog.dismiss();
         onSuccess(data, tag);
+
     }
 
     @Override

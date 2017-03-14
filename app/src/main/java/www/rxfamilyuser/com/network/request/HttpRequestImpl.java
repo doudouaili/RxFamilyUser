@@ -7,6 +7,8 @@ import java.util.Map;
 import io.reactivex.Observable;
 import www.rxfamilyuser.com.base.BaseApplication;
 import www.rxfamilyuser.com.coom.Login.bean.UserBean;
+import www.rxfamilyuser.com.coom.drycargo.bean.DryReuseBean;
+import www.rxfamilyuser.com.coom.drycargo.bean.TitleBean;
 import www.rxfamilyuser.com.network.RetrofitManager;
 import www.rxfamilyuser.com.util.ConstantUtil;
 import www.rxfamilyuser.com.util.NetUtil;
@@ -32,7 +34,7 @@ public class HttpRequestImpl implements HttpRequest {
      */
     @NonNull
     private String getCacheControl() {
-        return NetUtil.isConnected(BaseApplication.getContext()) ? ConstantUtil.sCACHE_CONTROL_AGE : ConstantUtil.sCACHE_CONTROL_CACHE;
+        return NetUtil.isConnected(BaseApplication.getContext()) ? ConstantUtil.SCACHE_CONTROL_AGE : ConstantUtil.SCACHE_CONTROL_CACHE;
     }
 
     @Override
@@ -42,11 +44,22 @@ public class HttpRequestImpl implements HttpRequest {
 
     @Override
     public Observable<UserBean> findPassWord(Map<String, String> map) {
-          return RetrofitManager.getInstance().getAppService().findPassWord(getCacheControl(), map);
+        return RetrofitManager.getInstance().getAppService().findPassWord(getCacheControl(), map);
     }
 
     @Override
     public Observable<UserBean> login(Map<String, String> map) {
         return RetrofitManager.getInstance().getAppService().login(getCacheControl(), map);
+    }
+
+    @Override
+    public Observable<DryReuseBean> infor(Map<String, Integer> map) {
+        return RetrofitManager.getInstance().getAppService().infor(getCacheControl(), map);
+    }
+
+
+    @Override
+    public Observable<TitleBean> getTitle() {
+        return RetrofitManager.getInstance().getAppService().getTitle(getCacheControl());
     }
 }

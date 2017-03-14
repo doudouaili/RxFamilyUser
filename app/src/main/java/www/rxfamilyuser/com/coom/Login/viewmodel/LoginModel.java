@@ -21,7 +21,7 @@ import www.rxfamilyuser.com.coom.Login.view.MainActivity;
 import www.rxfamilyuser.com.coom.Login.view.RegisterActivity;
 import www.rxfamilyuser.com.databinding.ActivityLoginBinding;
 import www.rxfamilyuser.com.util.AppManagerUtils;
-import www.rxfamilyuser.com.util.ConstantUtil;
+import www.rxfamilyuser.com.util.SPkeyConstantUtil;
 
 /**
  * Created by ali on 2017/2/15.
@@ -44,32 +44,21 @@ public class LoginModel extends BaseModel<ActivityLoginBinding, ILoginControlImp
                 UserBean userBean = (UserBean) bean;
                 if (userBean.getCode() != 0) {
                     List<UserBean.User> users = userBean.getResult();
-                    SPUtils spUtils = new SPUtils(ConstantUtil.sSP_KEY);
+                    SPUtils spUtils = new SPUtils(SPkeyConstantUtil.SSP_KEY);
                     if (users != null) {
                         spUtils.putBoolean("login", true);
                         spUtils.putString("phone", users.get(0).getUser_phone());
                         spUtils.putString("photo", users.get(0).getUser_photo());
                     }
                     //保存用户名
-                    boolean checked = mBinder.checkEnableLogin.isChecked();
-                    if (checked) {
-                        spUtils.putBoolean("saveuser", true);
-                    } else {
-                        spUtils.putBoolean("saveuser", false);
-                    }
+                    spUtils.putBoolean("saveuser", mBinder.checkEnableLogin.isChecked());
 
                     //自动登录
-                    boolean checked1 = mBinder.checkRememberPwd.isChecked();
-                    if (checked1) {
-                        spUtils.putBoolean("automaticlogin", true);
-                    } else {
-                        spUtils.putBoolean("automaticlogin", false);
-                    }
+                    spUtils.putBoolean("automaticlogin", mBinder.checkRememberPwd.isChecked());
 
                     Intent intent = new Intent(getContent(), MainActivity.class);
                     getContent().startActivity(intent);
                     AppManagerUtils.getAppManager().finishActivity(LoginActivity.class);
-
                     ToastUtils.showShortToast(userBean.getMsg());
                 }
                 ToastUtils.showShortToast(userBean.getMsg());

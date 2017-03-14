@@ -9,7 +9,7 @@ import www.rxfamilyuser.com.R;
 import www.rxfamilyuser.com.base.BaseActivity;
 import www.rxfamilyuser.com.coom.Login.viewmodel.LoginModel;
 import www.rxfamilyuser.com.databinding.ActivityLoginBinding;
-import www.rxfamilyuser.com.util.ConstantUtil;
+import www.rxfamilyuser.com.util.SPkeyConstantUtil;
 import www.rxfamilyuser.com.util.TitleBuilderUtils;
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginModel> {
@@ -34,7 +34,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginModel
         mBinder.setLog(mModel);
 
         //是否要求保存用户名
-        SPUtils spUtils = new SPUtils(ConstantUtil.sSP_KEY);
+        SPUtils spUtils = new SPUtils(SPkeyConstantUtil.SSP_KEY);
         if (spUtils.getBoolean("saveuser")) {
             String phone = spUtils.getString("phone");
             mBinder.editPhoneLogin.setText(phone);

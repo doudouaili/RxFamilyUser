@@ -30,7 +30,7 @@ import www.rxfamilyuser.com.coom.Login.view.MainActivity;
 import www.rxfamilyuser.com.coom.Login.view.RegisterActivity;
 import www.rxfamilyuser.com.databinding.ActivityRegisterBinding;
 import www.rxfamilyuser.com.util.AppManagerUtils;
-import www.rxfamilyuser.com.util.ConstantUtil;
+import www.rxfamilyuser.com.util.SPkeyConstantUtil;
 
 /**
  * Created by ali on 2017/2/20.
@@ -58,7 +58,7 @@ public class RegisterModel extends BaseModel<ActivityRegisterBinding, IRegisterC
                 if (userBean.getCode() == 1) {
                     List<UserBean.User> users = userBean.getResult();
                     if (users != null) {
-                        SPUtils spUtils = new SPUtils(ConstantUtil.sSP_KEY);
+                        SPUtils spUtils = new SPUtils(SPkeyConstantUtil.SSP_KEY);
                         spUtils.putBoolean("login", true);
                         spUtils.putString("phone", users.get(0).getUser_phone());
                         spUtils.putString("photo", users.get(0).getUser_photo());

@@ -33,6 +33,7 @@
                 android:background="@color/colorAccent"
                 app:tabIndicatorColor="@color/white"
                 app:tabMode="scrollable"
+                app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
                 app:tabSelectedTextColor="@color/white"
                 app:tabTextColor="@color/wx_line" />
 

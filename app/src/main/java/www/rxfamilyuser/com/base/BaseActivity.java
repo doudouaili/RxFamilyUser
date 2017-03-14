@@ -24,6 +24,7 @@ public abstract class BaseActivity<T extends ViewDataBinding, M extends BaseMode
         super.onCreate(savedInstanceState);
         mBinder = DataBindingUtil.setContentView(this, getLayoutId());
         AppManagerUtils.getAppManager().addActivity(this);
+
         Type genType = getClass().getGenericSuperclass();
         Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
         Class<M> bizClass = (Class) params[1];
@@ -34,6 +35,7 @@ public abstract class BaseActivity<T extends ViewDataBinding, M extends BaseMode
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+
         mModel.setView(this);
         mModel.onCreate();
         initView();

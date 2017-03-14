@@ -10,7 +10,6 @@ import www.rxfamilyuser.com.R;
 import www.rxfamilyuser.com.base.BaseActivity;
 import www.rxfamilyuser.com.coom.Login.viewmodel.StartModel;
 import www.rxfamilyuser.com.databinding.ActivityStartBinding;
-import www.rxfamilyuser.com.util.ConstantUtil;
 import www.rxfamilyuser.com.util.SPkeyConstantUtil;
 
 public class StartActivity extends BaseActivity<ActivityStartBinding, StartModel> {
@@ -36,10 +35,10 @@ public class StartActivity extends BaseActivity<ActivityStartBinding, StartModel
     }
 
     private void jumpNextPage() {
-        SPUtils spUtils = new SPUtils(ConstantUtil.sSP_KEY);
-        if (!spUtils.getBoolean(SPkeyConstantUtil.sInitialize)) {
+        SPUtils spUtils = new SPUtils(SPkeyConstantUtil.SSP_KEY);
+        if (!spUtils.getBoolean(SPkeyConstantUtil.SInitialize)) {
             intent2Activity(GuideActivity.class);
-            spUtils.putBoolean(SPkeyConstantUtil.sInitialize, true);
+            spUtils.putBoolean(SPkeyConstantUtil.SInitialize, true);
             finish();
         } else {
             intent2Activity(MainActivity.class);

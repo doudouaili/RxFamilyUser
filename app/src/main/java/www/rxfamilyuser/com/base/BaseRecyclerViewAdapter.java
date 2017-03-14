@@ -1,12 +1,17 @@
 package www.rxfamilyuser.com.base;
 
 import android.content.Context;
+import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.List;
 
@@ -25,7 +30,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
      */
     public int mItemLayout;
 
-    /*@BindingAdapter({"app:adapter", "app:data", "app:item"})
+    @BindingAdapter({"app:adapter", "app:data", "app:item"})
     public static <T> void setListBinding(final XRecyclerView view, final BaseRecyclerViewAdapter<T> tTextadaap, final List<T> data, final int item) {
         if (view.getTag() == null) {
             view.setAdapter(tTextadaap);
@@ -39,7 +44,13 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
         tTextadaap.setContext(view.getContext());
         tTextadaap.setItem(item);
     }
-*/
+
+    @BindingAdapter({"app:imageUrl"})
+    public static void loadImage(ImageView view, String url) {
+        Glide.with(view.getContext()).load(url).asBitmap().fitCenter().into(view);
+
+//        Picasso.with(view.getContext()).load(url).into(view);
+    }
 
     public void setData(List<T> datas) {
         this.mDataList = datas;

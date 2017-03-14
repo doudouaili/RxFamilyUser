@@ -1,22 +1,30 @@
 package www.rxfamilyuser.com.coom.drycargo.view;
 
-import android.os.Handler;
+import android.annotation.SuppressLint;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
-import java.util.ArrayList;
-
 import www.rxfamilyuser.com.R;
 import www.rxfamilyuser.com.base.BaseFragment;
-import www.rxfamilyuser.com.coom.drycargo.adapter.MyAdapter;
 import www.rxfamilyuser.com.coom.drycargo.viewmodel.DryReuseModel;
 import www.rxfamilyuser.com.databinding.FragmentDryReuseBinding;
 
+@SuppressLint("ValidFragment")
 public class DryReuseFragment extends BaseFragment<FragmentDryReuseBinding, DryReuseModel> {
-    private MyAdapter mAdapter;
+    private int mType = 1;
 
+
+    private int mPage = 1;
+
+    public int getmPage() {
+        return mPage;
+    }
+
+    public DryReuseFragment(int i) {
+        mType = i;
+    }
 
     @Override
     public int getLayoutId() {
@@ -28,49 +36,28 @@ public class DryReuseFragment extends BaseFragment<FragmentDryReuseBinding, DryR
         mBinder.setModel(mModel);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
         mBinder.xrView.setLayoutManager(linearLayoutManager);
-        listData = new ArrayList<String>();
         mBinder.xrView.setPullRefreshEnabled(false);
         mBinder.xrView.setLoadingMoreEnabled(true);
-        mAdapter = new MyAdapter(listData);
-
-        mBinder.xrView.setAdapter(mAdapter);
-
 
         mBinder.srLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-        getData();
+
+        mModel.getDryData(mType, mPage);
+
         mBinder.xrView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    public void run() {
-                        listData.clear();
-                        for (int i = 0; i < 15; i++) {
-                            listData.add("item" + i + "after " + 22 + " times of refresh");
-                        }
-                        mAdapter.notifyDataSetChanged();
-                        mBinder.xrView.refreshComplete();
-                    }
 
-                }, 1000);            //refresh data here
             }
 
             @Override
             public void onLoadMore() {
-                new Handler().postDelayed(new Runnable() {
-                    public void run() {
-                        listData.clear();
-                        for (int i = 0; i < 15; i++) {
-                            listData.add("item" + i + "after " + 22 + " times of refresh");
-                        }
-                        mAdapter.notifyDataSetChanged();
-                        mBinder.xrView.refreshComplete();
-                    }
-
-                }, 1000);            //refresh data here
+                mPage++;
+                mModel.getDryData(mType, mPage);
             }
         });
 
@@ -85,30 +72,9 @@ public class DryReuseFragment extends BaseFragment<FragmentDryReuseBinding, DryR
             @Override
             public void onRefresh() {
                 //网络请求
-                getData();
+                mPage = 1;
+                mModel.getDryData(mType, mPage);
             }
         });
-    }
-
-    private Handler handler = new Handler();
-    private ArrayList<String> listData;
-
-    /**
-     * 获取测试数据
-     */
-    private void getData() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                listData.clear();
-                for (int i = 0; i < 15; i++) {
-                    listData.add("item" + i + "after " + 111 + " times of refresh");
-                }
-                mAdapter.notifyDataSetChanged();
-                mBinder.srLayout.setRefreshing(false);
-                mBinder.xrView.refreshComplete();
-            }
-        }, 2500);
-
     }
 }

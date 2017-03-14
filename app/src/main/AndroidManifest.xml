@@ -35,7 +35,6 @@
         <activity
             android:name=".coom.Login.view.GuideActivity"
             android:theme="@style/MyFullScreenTheme" />
-        <activity android:name=".coom.sidebar.view.PersonageActivity" />
         <activity android:name=".coom.Login.view.RegisterActivity"></activity>
     </application>
 

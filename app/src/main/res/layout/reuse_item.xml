@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="ResultBean"
+            type="www.rxfamilyuser.com.coom.drycargo.bean.DryReuseBean.ResultBean"></variable>
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_context"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10px"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:layout_marginTop="35px"
+            android:layout_toLeftOf="@+id/iv_photo"
+            android:ellipsize="end"
+            android:lines="2"
+            android:text="@{ResultBean.title}"
+            android:textColor="@color/shadow" />
+
+
+        <ImageView
+            android:id="@+id/iv_photo"
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:layout_alignParentRight="true"
+            android:layout_margin="20px"
+            android:scaleType="center"
+            android:src="@mipmap/image_def"
+            app:imageUrl="@{ResultBean.img}" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_context"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="30px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{ResultBean.commenNum}"
+                android:textColor="@color/shadow" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="评论"
+                android:textColor="@color/shadow" />
+
+            <TextView
+                android:id="@+id/tv_read"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:text="@{ResultBean.lookNum}"
+                android:textColor="@color/shadow" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="阅读"
+                android:textColor="@color/shadow" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:text="@{ResultBean.time}"
+                android:textColor="@color/shadow" />
+        </LinearLayout>
+
+        <View
+            style="@style/view_line"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="15px"></View>
+
+
+    </RelativeLayout>
+</layout>

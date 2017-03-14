@@ -21,10 +21,14 @@ public class ILoginControlImpl extends BaseNetControl implements ILoginControl {
     @Override
     public void login(final RequestCallBack callBack, Map<String, String> map, final int tag) {
         callBack.beforeRequest(tag);
+
         HttpRequestImpl.getInstance().login(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+
                 .subscribe(new Observer<UserBean>() {
+
+
                     @Override
                     public void onSubscribe(Disposable d) {
                         mDisposable = d;
@@ -45,6 +49,5 @@ public class ILoginControlImpl extends BaseNetControl implements ILoginControl {
 
                     }
                 });
-
     }
 }

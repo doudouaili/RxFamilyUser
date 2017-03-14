@@ -38,7 +38,8 @@ public class RetrofitManager {
             //192.168.1.102
             //192.168.1.133
             //192.168.1.101
-            HTTP_URL = "http://192.168.1.101:8080/";
+            //192.168.1.117
+            HTTP_URL = "http://192.168.1.117:8080/";
         }
     }
 
@@ -98,7 +99,7 @@ public class RetrofitManager {
                         .build();
             } else {
                 return originalResponse.newBuilder()
-                        .header("Cache-Control", "public, only-if-cached, max-stale=" + ConstantUtil.sCACHE_STALE_SEC)
+                        .header("Cache-Control", "public, only-if-cached, max-stale=" + ConstantUtil.SCACHE_STALE_SEC)
                         .removeHeader("Pragma")
                         .build();
             }

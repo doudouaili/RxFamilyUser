@@ -8,6 +8,8 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import www.rxfamilyuser.com.coom.Login.bean.UserBean;
+import www.rxfamilyuser.com.coom.drycargo.bean.DryReuseBean;
+import www.rxfamilyuser.com.coom.drycargo.bean.TitleBean;
 
 /**
  * Created by ali on 2017/2/16.
@@ -49,4 +51,23 @@ public interface AppService {
     @POST("TomcatTest/Login")
     Observable<UserBean> login(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, String> map);
 
+    /**
+     * 资讯首页
+     *
+     * @param cacheControl
+     * @param map
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("TomcatTest/Infor")
+    Observable<DryReuseBean> infor(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, Integer> map);
+
+    /**
+     * 获取干货标题
+     *
+     * @param cacheControl
+     * @return
+     */
+    @POST("TomcatTest/LayoutTitle")
+    Observable<TitleBean> getTitle(@Header("Cache-Control") String cacheControl);
 }

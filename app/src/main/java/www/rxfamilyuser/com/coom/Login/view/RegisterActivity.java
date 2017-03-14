@@ -73,7 +73,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
 
     @Override
     public void initView() {
-        SMSSDK.initSDK(this, ConstantUtil.sMOB_APP_kEY, ConstantUtil.sMOB_APP_SECRET);
+        SMSSDK.initSDK(this, ConstantUtil.SMOB_APP_kEY, ConstantUtil.SMOB_APP_SECRET);
         SMSSDK.registerEventHandler(mEventHandler); //注册短信回调
 
         mType = getIntent().getIntExtra("type", 0);
