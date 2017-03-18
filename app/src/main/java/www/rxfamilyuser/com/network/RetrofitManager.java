@@ -31,15 +31,13 @@ public class RetrofitManager {
      * 服务器地址
      */
     public static String HTTP_URL = null;
-    public static Boolean DebugMode = true;
+    public static Boolean DebugMode = false;
 
     static {
         if (DebugMode) {
-            //192.168.1.102
-            //192.168.1.133
-            //192.168.1.101
-            //192.168.1.117
-            HTTP_URL = "http://192.168.1.117:8080/";
+            HTTP_URL = "http://192.168.1.102:8080/";
+        }else {
+            HTTP_URL = "http://112.74.104.213:8080/RxUserFamily/";
         }
     }
 

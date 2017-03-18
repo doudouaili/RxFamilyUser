@@ -11,6 +11,7 @@ import www.rxfamilyuser.com.coom.Login.view.MainActivity;
 import www.rxfamilyuser.com.coom.circle.view.CircleFragment;
 import www.rxfamilyuser.com.coom.drycargo.view.DryCargoFragment;
 import www.rxfamilyuser.com.coom.find.view.FindFragment;
+import www.rxfamilyuser.com.coom.personal.view.PerCenterFragment;
 import www.rxfamilyuser.com.databinding.ActivityMainBinding;
 
 /**
@@ -39,8 +40,10 @@ public class MainModel extends BaseModel<ActivityMainBinding, MainControlImpl> {
     public void initViewPager() {
         MainActivity mainActivity = (MainActivity) UI;
         MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(mainActivity.getSupportFragmentManager(), addListFragment());
+
         mBinder.viewPager.setAdapter(mainViewPagerAdapter);
         mBinder.viewPager.setOffscreenPageLimit(2);
+
     }
 
     /**
@@ -53,16 +56,17 @@ public class MainModel extends BaseModel<ActivityMainBinding, MainControlImpl> {
         fragments.add(new DryCargoFragment());
         fragments.add(new CircleFragment());
         fragments.add(new FindFragment());
-        fragments.add(new FindFragment());
+        fragments.add(new PerCenterFragment());
         return fragments;
     }
 
 
     /**
      * 设置vp的界面
+     *
      * @param id
      */
-    public void  setCurrentItem(int id){
+    public void setCurrentItem(int id) {
         mBinder.viewPager.setCurrentItem(id, false);
     }
 

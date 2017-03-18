@@ -76,5 +76,9 @@ public class DryReuseFragment extends BaseFragment<FragmentDryReuseBinding, DryR
                 mModel.getDryData(mType, mPage);
             }
         });
+
+
+
     }
+
 }

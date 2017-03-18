@@ -29,13 +29,15 @@
             android:name="design_height"
             android:value="1280" />
 
-        <activity android:name=".coom.Login.view.MainActivity"
-            android:launchMode="singleInstance"/>
+        <activity
+            android:name=".coom.Login.view.MainActivity"
+            android:launchMode="singleInstance" />
         <activity android:name=".coom.Login.view.LoginActivity" />
         <activity
             android:name=".coom.Login.view.GuideActivity"
             android:theme="@style/MyFullScreenTheme" />
-        <activity android:name=".coom.Login.view.RegisterActivity"></activity>
+        <activity android:name=".coom.Login.view.RegisterActivity" />
+        <activity android:name=".coom.drycargo.view.InforActivity"></activity>
     </application>
 
 </manifest>

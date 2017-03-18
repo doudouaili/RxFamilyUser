@@ -3,12 +3,14 @@ package www.rxfamilyuser.com.base;
 import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.ViewDataBinding;
+import android.view.View;
 
 import com.blankj.utilcode.utils.ToastUtils;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+import www.rxfamilyuser.com.R;
 import www.rxfamilyuser.com.network.RequestCallBack;
 import www.rxfamilyuser.com.util.DialogUtil;
 
@@ -24,11 +26,14 @@ public abstract class BaseModel<T extends ViewDataBinding, M extends IBaseContro
     protected M mControl = null;
 
     public DialogUtil mDialog;
+    public View mNotWorkView;//无网络图片
 
     public void setView(IModelActivitiy activity) {
+
         UI = activity;
         mBinder = (T) UI.getBinder();
         mDialog = new DialogUtil(UI.getConText());
+        mNotWorkView = View.inflate(UI.getConText(), R.layout.network, null);
 
         Type genType = getClass().getGenericSuperclass();
         Type[] params = ((ParameterizedType) genType).getActualTypeArguments();

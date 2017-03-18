@@ -1,21 +1,28 @@
 <layout>
 
     <data>
+
         <variable
             name="model"
-            type="www.rxfamilyuser.com.coom.circle.viewmodel.CircleViewModel"/>
+            type="www.rxfamilyuser.com.coom.circle.viewmodel.CircleViewModel" />
     </data>
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:orientation="vertical"
-        tools:context="www.rxfamilyuser.com.coom.circle.view.CircleFragment">
+        tools:context="www.rxfamilyuser.com.coom.find.view.FindFragment">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="此模块正在开发"
+            android:textColor="@color/main_text"
+            android:textSize="@dimen/_px34" />
 
+    </RelativeLayout>
 
-    </LinearLayout>
 </layout>

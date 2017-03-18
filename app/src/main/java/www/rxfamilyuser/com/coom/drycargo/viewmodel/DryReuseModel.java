@@ -1,7 +1,10 @@
 package www.rxfamilyuser.com.coom.drycargo.viewmodel;
 
+import android.content.Intent;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableInt;
+import android.os.Bundle;
+import android.view.View;
 
 import com.blankj.utilcode.utils.ToastUtils;
 
@@ -14,7 +17,9 @@ import www.rxfamilyuser.com.coom.drycargo.adapter.DryReuseAdapter;
 import www.rxfamilyuser.com.coom.drycargo.bean.DryReuseBean;
 import www.rxfamilyuser.com.coom.drycargo.netcontrol.impl.DryReuseControlImpl;
 import www.rxfamilyuser.com.coom.drycargo.view.DryReuseFragment;
+import www.rxfamilyuser.com.coom.drycargo.view.InforActivity;
 import www.rxfamilyuser.com.databinding.FragmentDryReuseBinding;
+import www.rxfamilyuser.com.widget.OnRecyclerViewItemClickListener;
 
 /**
  * Created by ali on 2017/3/2.
@@ -30,6 +35,16 @@ public class DryReuseModel extends BaseModel<FragmentDryReuseBinding, DryReuseCo
     public void onCreate() {
         super.onCreate();
         dryReuseFragment = (DryReuseFragment) UI;
+        mReuseAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(dryReuseFragment.getContext(), InforActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("html",mDataList.get(position).getHtml());
+                intent.putExtras(bundle);
+                dryReuseFragment.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -48,7 +63,7 @@ public class DryReuseModel extends BaseModel<FragmentDryReuseBinding, DryReuseCo
 
         } else {
             ToastUtils.showShortToast(dryReuseBean.getMsg());
-
+//            mBinder.xrView.setEmptyView(mNotWorkView);
         }
         mReuseAdapter.notifyDataSetChanged();
         mBinder.xrView.loadMoreComplete();
@@ -57,6 +72,8 @@ public class DryReuseModel extends BaseModel<FragmentDryReuseBinding, DryReuseCo
 
     @Override
     public void onError(String errorMsg) {
+//        mBinder.frg.addView(mNotWorkView);
+//        mBinder.xrView.setEmptyView(mNotWorkView);
 
         mBinder.xrView.loadMoreComplete();
         mBinder.srLayout.setRefreshing(false);

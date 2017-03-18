@@ -11,9 +11,10 @@ import www.rxfamilyuser.com.coom.Login.viewmodel.MainModel;
 import www.rxfamilyuser.com.databinding.ActivityMainBinding;
 import www.rxfamilyuser.com.util.AppManagerUtils;
 
-public class MainActivity extends BaseActivity<ActivityMainBinding, MainModel> implements  RadioGroup.OnCheckedChangeListener {
+public class MainActivity extends BaseActivity<ActivityMainBinding, MainModel> implements RadioGroup.OnCheckedChangeListener {
     //返回键点击时间
     private long mExitTime = 0;
+
 
     @Override
     public int getLayoutId() {
@@ -29,6 +30,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainModel> i
 
         mBinder.rg.setOnCheckedChangeListener(this);
 
+//        mBinder.viewPager.addOnPageChangeListener(mChListener);
+
     }
 
     @Override
@@ -41,7 +44,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainModel> i
             AppManagerUtils.getAppManager().AppExit(getApplicationContext());
         }
     }
-
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -153,4 +155,37 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainModel> i
 
         guideView.show();*/
     }
+
+    /**
+     * viewpager滑动监听
+     */
+   /* private ViewPager.OnPageChangeListener mChListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            switch (position) {
+                case 0:
+                    mBinder.rg.check(R.id.rb_home);
+                    break;
+                case 1:
+                    mBinder.rg.check(R.id.rb_live);
+                    break;
+                case 2:
+                    mBinder.rg.check(R.id.rb_center);
+                    break;
+                case 3:
+                    mBinder.rg.check(R.id.rb_my);
+                    break;
+            }
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };*/
 }

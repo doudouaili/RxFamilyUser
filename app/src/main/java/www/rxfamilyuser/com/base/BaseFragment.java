@@ -24,6 +24,7 @@ public abstract class BaseFragment<T extends ViewDataBinding, M extends BaseMode
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Type genType = getClass().getGenericSuperclass();
         Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
         Class<M> bizClass = (Class) params[1];
@@ -40,6 +41,8 @@ public abstract class BaseFragment<T extends ViewDataBinding, M extends BaseMode
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinder = DataBindingUtil.inflate(LayoutInflater.from(getActivity()), getLayoutId(), null, false);
+
+
         mModel.setView(this);
         mModel.onCreate();
         initView();
@@ -84,5 +87,6 @@ public abstract class BaseFragment<T extends ViewDataBinding, M extends BaseMode
         super.onDestroy();
         mModel.onDestroy();
     }
+
 
 }

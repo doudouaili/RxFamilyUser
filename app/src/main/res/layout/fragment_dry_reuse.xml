@@ -19,6 +19,7 @@
             android:layout_height="match_parent">
 
             <FrameLayout
+                android:id="@+id/frg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -28,10 +29,12 @@
                     android:layout_height="match_parent"
                     app:adapter="@{model.mReuseAdapter}"
                     app:data="@{model.mDataList}"
-                    app:item="@{model.mLayoutId}">
+                    app:item="@{model.mLayoutId}"></com.jcodecraeer.xrecyclerview.XRecyclerView>
 
-                </com.jcodecraeer.xrecyclerview.XRecyclerView>
+
             </FrameLayout>
         </android.support.v4.widget.SwipeRefreshLayout>
+
+
     </LinearLayout>
 </layout>

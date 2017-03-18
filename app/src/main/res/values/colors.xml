@@ -17,7 +17,7 @@
     <color name="main_text">#929292</color>
     <color name="transparent">#00000000</color>
     <color name="shadow">#cc222222</color>
-
+    <color name="ask_chiec_text">#999999</color>
 
 
 </resources>
