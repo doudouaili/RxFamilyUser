@@ -8,7 +8,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import www.rxfamilyuser.com.coom.Login.bean.UserBean;
-import www.rxfamilyuser.com.coom.drycargo.bean.DryReuseBean;
+import www.rxfamilyuser.com.coom.drycargo.bean.HomeBean;
 import www.rxfamilyuser.com.coom.drycargo.bean.TitleBean;
 
 /**
@@ -26,7 +26,7 @@ public interface AppService {
      * @Header("Cache-Control") String cacheControl是缓存 />
      */
     @FormUrlEncoded
-    @POST("TomcatTest/DisplayHeader")
+    @POST("concentrantion/DisplayHeader")
     Observable<UserBean> register(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, String> map);
 
     /**
@@ -37,7 +37,7 @@ public interface AppService {
      * @return
      */
     @FormUrlEncoded
-    @POST("TomcatTest/FindPas")
+    @POST("concentrantion/FindPas")
     Observable<UserBean> findPassWord(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, String> map);
 
     /**
@@ -48,7 +48,7 @@ public interface AppService {
      * @return
      */
     @FormUrlEncoded
-    @POST("TomcatTest/Login")
+    @POST("concentrantion/Login")
     Observable<UserBean> login(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, String> map);
 
     /**
@@ -59,15 +59,27 @@ public interface AppService {
      * @return
      */
     @FormUrlEncoded
-    @POST("TomcatTest/Infor")
-    Observable<DryReuseBean> infor(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, Integer> map);
+    @POST("concentrantion/Infor")
+    Observable<HomeBean> infor(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, Integer> map);
 
-    /**
+   /**
      * 获取干货标题
      *
      * @param cacheControl
      * @return
      */
-    @POST("TomcatTest/LayoutTitle")
-    Observable<TitleBean> getTitle(@Header("Cache-Control") String cacheControl);
+    @FormUrlEncoded
+    @POST("concentrantion/LayoutTitle")
+    Observable<TitleBean> getTitle(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, Integer> map);
+
+    /**
+     * 获取专家
+     *
+     * @param cacheControl
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("concentrantion/FindExpert")
+    Observable<HomeBean.DataBean.ExpertBean> findExertId(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, Integer> map);
+
 }

@@ -7,7 +7,7 @@ import java.util.Map;
 import io.reactivex.Observable;
 import www.rxfamilyuser.com.base.BaseApplication;
 import www.rxfamilyuser.com.coom.Login.bean.UserBean;
-import www.rxfamilyuser.com.coom.drycargo.bean.DryReuseBean;
+import www.rxfamilyuser.com.coom.drycargo.bean.HomeBean;
 import www.rxfamilyuser.com.coom.drycargo.bean.TitleBean;
 import www.rxfamilyuser.com.network.RetrofitManager;
 import www.rxfamilyuser.com.util.ConstantUtil;
@@ -53,13 +53,19 @@ public class HttpRequestImpl implements HttpRequest {
     }
 
     @Override
-    public Observable<DryReuseBean> infor(Map<String, Integer> map) {
+    public Observable<HomeBean> infor(Map<String, Integer> map) {
         return RetrofitManager.getInstance().getAppService().infor(getCacheControl(), map);
     }
 
 
     @Override
-    public Observable<TitleBean> getTitle() {
-        return RetrofitManager.getInstance().getAppService().getTitle(getCacheControl());
+    public Observable<TitleBean> getTitle(Map<String, Integer> map) {
+        return RetrofitManager.getInstance().getAppService().getTitle(getCacheControl(), map);
+    }
+
+
+    @Override
+    public Observable<HomeBean.DataBean.ExpertBean> findExertId(Map<String, Integer> map) {
+        return RetrofitManager.getInstance().getAppService().findExertId(getCacheControl(), map);
     }
 }

@@ -1,5 +1,7 @@
 package www.rxfamilyuser.com.coom.drycargo.netcontrol;
 
+import java.util.Map;
+
 import www.rxfamilyuser.com.network.RequestCallBack;
 
 /**
@@ -8,5 +10,5 @@ import www.rxfamilyuser.com.network.RequestCallBack;
 
 public interface IDryCargoControl {
 
-    void getTitile(RequestCallBack callBack, int tag);
+    void getTitile(RequestCallBack callBack, Map<String, Integer> map, int tag);
 }

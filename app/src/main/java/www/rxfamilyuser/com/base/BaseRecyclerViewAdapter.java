@@ -8,12 +8,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.List;
+
+import www.rxfamilyuser.com.util.Utils;
 
 /**
  * Created by ali on 2017/2/22.
@@ -48,8 +51,6 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
     @BindingAdapter({"app:imageUrl"})
     public static void loadImage(ImageView view, String url) {
         Glide.with(view.getContext()).load(url).asBitmap().fitCenter().into(view);
-
-//        Picasso.with(view.getContext()).load(url).into(view);
     }
 
     public void setData(List<T> datas) {
@@ -67,6 +68,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         View view = LayoutInflater.from(mContext).inflate(mItemLayout, parent, false);
         return new BaseViewHolder(view);
     }
@@ -74,6 +76,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position) {
         ViewDataBinding binding = holder.getBinding();
+        runEnterAnimation(binding.getRoot(), position);
         fillData(binding, position);
     }
 
@@ -103,5 +106,24 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
      * @param position  下标
      */
     public abstract void fillData(ViewDataBinding vdBinding, int position);
+
+
+    /**
+     * 列表加载动画
+     *
+     * @param view
+     * @param position
+     */
+    private void runEnterAnimation(View view, int position) {
+
+        view.setTranslationY(Utils.getScreenHeight(mContext));
+        view.animate()
+                .translationY(0)
+                .setStartDelay(100 * position)
+                .setInterpolator(new DecelerateInterpolator(3.f))
+                .setDuration(700)
+                .start();
+
+    }
 
 }

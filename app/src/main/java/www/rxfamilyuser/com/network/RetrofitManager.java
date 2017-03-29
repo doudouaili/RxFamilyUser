@@ -35,9 +35,9 @@ public class RetrofitManager {
 
     static {
         if (DebugMode) {
-            HTTP_URL = "http://192.168.1.102:8080/";
-        }else {
-            HTTP_URL = "http://112.74.104.213:8080/RxUserFamily/";
+            HTTP_URL = "http://192.168.1.109:8080/";
+        } else {
+            HTTP_URL = "http://112.74.104.213:8080/www.concentration.com/";
         }
     }
 
@@ -45,7 +45,6 @@ public class RetrofitManager {
 
     private final AppService mMallService;
     public static RetrofitManager retrofitManager;
-
 
     public RetrofitManager() {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(HTTP_URL)

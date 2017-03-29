@@ -15,13 +15,15 @@ public class BaseApplication extends Application {
 
     private static Context mContext;
 
-
     @Override
     public void onCreate() {
         super.onCreate();
         mContext = this;
         Utils.init(this);
-        LogUtils.getBuilder().setTag("RxFamilyUser")
+
+        LogUtils.Builder builder = LogUtils.getBuilder();
+
+        builder.setTag("RxFamilyUser")
                 .setLogSwitch(true)
                 .setLog2FileSwitch(false)
                 .create();

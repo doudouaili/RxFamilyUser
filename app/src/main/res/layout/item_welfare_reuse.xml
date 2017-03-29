@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="www.rxfamilyuser.com.coom.drycargo.bean.HomeBean.DataBean"></variable>
+    </data>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25px"
+            android:text="曾经的女神"
+            android:textColor="@color/shadow" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="400px"
+            android:layout_marginBottom="10px"
+            android:layout_marginLeft="50px"
+            android:layout_marginRight="50px"
+            android:layout_marginTop="20px"
+            android:scaleType="fitXY"
+            android:src="@mipmap/image_def"
+            app:imageUrl="@{data.welfareBean.welfare_img}" />
+
+        <View
+            style="@style/view_line"
+            android:layout_marginTop="15px"></View>
+    </LinearLayout>
+</layout>

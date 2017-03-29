@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="ResultBean"
-            type="www.rxfamilyuser.com.coom.drycargo.bean.DryReuseBean.ResultBean"></variable>
+            name="DataBean"
+            type="www.rxfamilyuser.com.coom.drycargo.bean.HomeBean.DataBean"></variable>
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,21 +15,32 @@
         android:background="@color/white">
 
         <TextView
+            android:id="@+id/tv_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="15px"
+            android:text="来自:资讯"
+            android:textColor="@color/shadow"
+            android:textSize="@dimen/_px30" />
+
+        <TextView
             android:id="@+id/tv_context"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_from"
             android:layout_marginBottom="10px"
             android:layout_marginLeft="20px"
             android:layout_marginRight="20px"
-            android:layout_marginTop="35px"
+            android:layout_marginTop="25px"
             android:layout_toLeftOf="@+id/iv_photo"
             android:ellipsize="end"
             android:lines="2"
-            android:text="@{ResultBean.title}"
+            android:text="@{DataBean.inforBean.infor_content}"
             android:textColor="@color/shadow" />
 
-
         <ImageView
+            android:transitionName="image_animation"
             android:id="@+id/iv_photo"
             android:layout_width="200px"
             android:layout_height="200px"
@@ -37,27 +48,27 @@
             android:layout_margin="20px"
             android:scaleType="center"
             android:src="@mipmap/image_def"
-            app:imageUrl="@{ResultBean.img}" />
+            app:imageUrl="@{DataBean.inforBean.infor_img}" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_context"
             android:layout_marginLeft="20px"
-            android:layout_marginTop="30px"
+            android:layout_marginTop="20px"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tv_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{ResultBean.commenNum}"
+                android:text="@{DataBean.inforBean.infor_commentNum}"
                 android:textColor="@color/shadow" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="评论"
+                android:text=" 评论"
                 android:textColor="@color/shadow" />
 
             <TextView
@@ -65,13 +76,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10px"
-                android:text="@{ResultBean.lookNum}"
+                android:text="@{DataBean.inforBean.infor_lookNum}"
                 android:textColor="@color/shadow" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="阅读"
+                android:text=" 阅读"
                 android:textColor="@color/shadow" />
 
             <TextView
@@ -79,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10px"
-                android:text="@{ResultBean.time}"
+                android:text="@{DataBean.work_time}"
                 android:textColor="@color/shadow" />
         </LinearLayout>
 

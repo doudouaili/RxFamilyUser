@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="DataBean"
+            type="www.rxfamilyuser.com.coom.drycargo.bean.HomeBean.DataBean"></variable>
+    </data>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="15px"
+            android:text="来自:笑话一刻"
+            android:textColor="@color/shadow"
+            android:textSize="@dimen/_px30" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_photo_joke"
+                android:layout_width="230px"
+                android:layout_height="230px"
+                android:layout_marginBottom="10px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="50px"
+                android:layout_marginTop="20px"
+                android:src="@mipmap/image_def"
+                app:imageUrl="@{DataBean.jokeBean.joke_img}" />
+
+            <TextView
+                android:id="@+id/tv_context_joke"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="35px"
+                android:layout_toRightOf="@+id/iv_photo_joke"
+                android:ellipsize="end"
+                android:lineSpacingExtra="17px"
+                android:lines="4"
+                android:text="@{DataBean.jokeBean.joke_content}"
+                android:textColor="@color/shadow" />
+        </RelativeLayout>
+
+        <View
+            style="@style/view_line"
+            android:layout_marginTop="15px"></View>
+
+    </LinearLayout>
+</layout>

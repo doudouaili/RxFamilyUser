@@ -9,15 +9,16 @@ import www.rxfamilyuser.com.base.BaseBean;
  */
 
 public class TitleBean extends BaseBean {
+
     /**
      * code : 1
-     * msg : 查询成功
-     * result : ["Retrofit","RxJava2系列","Android框架","Android源码","Android架构","自定义View"]
+     * message : 数据查找成功~~
+     * data : ["Retrofit2","RxJava2系列","Android框架","Android源码","Android架构","自定义View"]
      */
 
     private int code;
-    private String msg;
-    private List<String> result;
+    private String message;
+    private List<String> data;
 
     public int getCode() {
         return code;
@@ -27,19 +28,19 @@ public class TitleBean extends BaseBean {
         this.code = code;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public List<String> getResult() {
-        return result;
+    public List<String> getData() {
+        return data;
     }
 
-    public void setResult(List<String> result) {
-        this.result = result;
+    public void setData(List<String> data) {
+        this.data = data;
     }
 }

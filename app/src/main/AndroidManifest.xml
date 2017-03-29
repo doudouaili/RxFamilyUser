@@ -4,6 +4,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--往sdcard中写入数据的权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <!--在sdcard中创建/删除文件的权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
+
 
     <application
         android:name=".base.BaseApplication"
@@ -32,6 +37,7 @@
         <activity
             android:name=".coom.Login.view.MainActivity"
             android:launchMode="singleInstance" />
+
         <activity android:name=".coom.Login.view.LoginActivity" />
         <activity
             android:name=".coom.Login.view.GuideActivity"

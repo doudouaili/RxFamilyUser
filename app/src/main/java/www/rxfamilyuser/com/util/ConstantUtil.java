@@ -37,4 +37,6 @@ public class ConstantUtil {
      * 标题
      */
     public static final String STITLE_KEY ="title";
+
+    public static final String SNES_KEY ="news";
 }

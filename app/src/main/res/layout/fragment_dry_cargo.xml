@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
                 app:tabIndicatorColor="@color/white"
-                app:tabMode="scrollable"
+                app:tabMode="fixed"
                 app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
                 app:tabSelectedTextColor="@color/white"
                 app:tabTextColor="@color/wx_line" />
@@ -54,8 +54,8 @@
             android:layout_marginBottom="200px"
             android:layout_marginRight="80px"
             android:transitionName="justdoit"
+            android:src="@mipmap/ftb_ried"
             app:layout_behavior="www.rxfamilyuser.com.widget.ScrollAwareFABBehavior" />
-
 
     </android.support.design.widget.CoordinatorLayout>
 

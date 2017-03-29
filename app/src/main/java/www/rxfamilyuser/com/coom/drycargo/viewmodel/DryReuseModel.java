@@ -3,7 +3,6 @@ package www.rxfamilyuser.com.coom.drycargo.viewmodel;
 import android.content.Intent;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableInt;
-import android.os.Bundle;
 import android.view.View;
 
 import com.blankj.utilcode.utils.ToastUtils;
@@ -14,19 +13,18 @@ import java.util.Map;
 import www.rxfamilyuser.com.R;
 import www.rxfamilyuser.com.base.BaseModel;
 import www.rxfamilyuser.com.coom.drycargo.adapter.DryReuseAdapter;
-import www.rxfamilyuser.com.coom.drycargo.bean.DryReuseBean;
+import www.rxfamilyuser.com.coom.drycargo.bean.HomeBean;
 import www.rxfamilyuser.com.coom.drycargo.netcontrol.impl.DryReuseControlImpl;
 import www.rxfamilyuser.com.coom.drycargo.view.DryReuseFragment;
 import www.rxfamilyuser.com.coom.drycargo.view.InforActivity;
 import www.rxfamilyuser.com.databinding.FragmentDryReuseBinding;
-import www.rxfamilyuser.com.widget.OnRecyclerViewItemClickListener;
 
 /**
  * Created by ali on 2017/3/2.
  */
 
 public class DryReuseModel extends BaseModel<FragmentDryReuseBinding, DryReuseControlImpl> {
-    public ObservableArrayList<DryReuseBean.ResultBean> mDataList = new ObservableArrayList();
+    public ObservableArrayList<HomeBean.DataBean> mDataList = new ObservableArrayList();
     public ObservableInt mLayoutId = new ObservableInt(R.layout.reuse_item);
     public DryReuseAdapter mReuseAdapter = new DryReuseAdapter();
     private DryReuseFragment dryReuseFragment;
@@ -35,16 +33,26 @@ public class DryReuseModel extends BaseModel<FragmentDryReuseBinding, DryReuseCo
     public void onCreate() {
         super.onCreate();
         dryReuseFragment = (DryReuseFragment) UI;
-        mReuseAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+
+      /*  mReuseAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(dryReuseFragment.getContext(), InforActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("html",mDataList.get(position).getHtml());
-                intent.putExtras(bundle);
-                dryReuseFragment.getContext().startActivity(intent);
+                int itemViewType = mReuseAdapter.getItemViewType(position);
+                switch (itemViewType) {
+                    case 1:
+                        Intent intent = new Intent(getContent(), InforActivity.class);
+                        intent.putExtra("url", mDataList.get(position).getInforBean().getInfor_img());
+                        ActivityOptionsCompat options =
+                                ActivityOptionsCompat.makeSceneTransitionAnimation(dryReuseFragment.getActivity(),
+                                        view.findViewById(R.id.iv_photo), "image_animation");
+                        ActivityCompat.startActivity(getContent(), intent, options.toBundle());
+                        String name = Thread.currentThread().getName();
+                        ToastUtils.showShortToast(name);
+                        break;
+                }
+                ToastUtils.showShortToast("点击了");
             }
-        });
+        });*/
     }
 
     @Override
@@ -54,15 +62,13 @@ public class DryReuseModel extends BaseModel<FragmentDryReuseBinding, DryReuseCo
 
     @Override
     public void onSuccess(Object bean, int tag) {
-        DryReuseBean dryReuseBean = (DryReuseBean) bean;
-        if (dryReuseBean.getCode() == 1) {
-            if (dryReuseFragment.getmPage() == 1) {
-                mDataList.clear();
-            }
-            mDataList.addAll(dryReuseBean.getResult());
+        HomeBean homeBean = (HomeBean) bean;
+        if (homeBean.getCode() == 1) {
+            mDataList.clear();
+            mDataList.addAll(homeBean.getData());
 
         } else {
-            ToastUtils.showShortToast(dryReuseBean.getMsg());
+            ToastUtils.showShortToast(homeBean.getMessage());
 //            mBinder.xrView.setEmptyView(mNotWorkView);
         }
         mReuseAdapter.notifyDataSetChanged();
@@ -90,5 +96,39 @@ public class DryReuseModel extends BaseModel<FragmentDryReuseBinding, DryReuseCo
         map.put("type", type);
         map.put("page", page);
         mControl.getDryData(this, map, 1);
+    }
+
+    /**
+     * 跳转到资讯详情
+     *
+     * @param view
+     * @param position
+     */
+    public void intent2Infor(View view, int position) {
+        Intent intent = new Intent();
+        intent.setClass(getContent(), InforActivity.class);
+        intent.putExtra("infor", mDataList.get(position).getInforBean());
+        getContent().startActivity(intent);
+    }
+
+    /**
+     * 跳转到笑话
+     */
+    public void intent2Joke() {
+
+    }
+
+    /**
+     * 跳转到专家详情
+     */
+    public void intent2Expert() {
+
+    }
+
+    /**
+     * 跳转到福利
+     */
+    public void intent2Welfare() {
+
     }
 }

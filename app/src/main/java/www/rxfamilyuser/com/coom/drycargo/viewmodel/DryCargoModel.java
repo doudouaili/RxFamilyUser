@@ -2,10 +2,10 @@ package www.rxfamilyuser.com.coom.drycargo.viewmodel;
 
 import android.support.v4.app.Fragment;
 
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import www.rxfamilyuser.com.base.BaseModel;
 import www.rxfamilyuser.com.coom.Login.adapter.MainViewPagerAdapter;
@@ -28,24 +28,25 @@ public class DryCargoModel extends BaseModel<FragmentDryCargoBinding, DryCargoCo
     @Override
     public void onSuccess(Object bean, int tag) {
         TitleBean titleBean = (TitleBean) bean;
-        ArrayList<Fragment> fragments = addListFragment(titleBean.getResult().size());
-        setTabAdapter(fragments, titleBean.getResult());
+        ArrayList<Fragment> fragments = addListFragment(titleBean.getData().size());
+        setTabAdapter(fragments, titleBean.getData());
     }
 
     @Override
     public void onError(String errorMsg) {
         //网络连接失败,从本地读取
-        String json = "{\"code\":1,\"msg\":\"查询成功\",\"result\":[\"Retrofit\",\"RxJava2系列\",\"Android框架\",\"Android源码\",\"Android架构\",\"自定义View\"]}";
+       /* String json = "";
         TitleBean titleBean = new Gson().fromJson(json, TitleBean.class);
-        ArrayList<Fragment> fragments = addListFragment(titleBean.getResult().size());
-        setTabAdapter(fragments, titleBean.getResult());
+        ArrayList<Fragment> fragments = addListFragment(titleBean.getData().size());
+        setTabAdapter(fragments, titleBean.getData());*/
     }
 
     /**
      * 获取标题
      */
     public void getTitle() {
-        mControl.getTitile(this, 1);
+        Map<String, Integer> map = new HashMap<>();
+        mControl.getTitile(this, map, 1);
     }
 
     /**
@@ -57,7 +58,7 @@ public class DryCargoModel extends BaseModel<FragmentDryCargoBinding, DryCargoCo
         ArrayList<Fragment> fragments = new ArrayList<>();
 
         for (int i = 0; i < size; i++) {
-            fragments.add(new DryReuseFragment(i + 1));
+            fragments.add(new DryReuseFragment(1));
         }
         return fragments;
     }
@@ -71,7 +72,5 @@ public class DryCargoModel extends BaseModel<FragmentDryCargoBinding, DryCargoCo
         for (int i = 0; i < result.size(); i++) {
             mBinder.tabs.getTabAt(i).setText(result.get(i));
         }
-
     }
-
 }

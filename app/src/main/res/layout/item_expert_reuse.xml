@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="data"
+            type="www.rxfamilyuser.com.coom.drycargo.bean.HomeBean.DataBean.ExpertBean"></variable>
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="10px"
+            android:text="来自csdn"
+            android:textColor="@color/shadow" />
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="194px"
+                android:layout_height="194px"
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="10px"
+                android:src="@mipmap/default_user"
+                app:civ_border_color="@color/view_line"
+                app:civ_border_width="2px"
+                app:imageUrl="@{data.expert_img}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="10px"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{data.expert_name}"
+                    android:textColor="@color/shadow" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20px"
+                    android:ellipsize="end"
+                    android:lineSpacingExtra="10px"
+                    android:lines="3"
+                    android:text="@{data.expert_abstract}"
+                    android:textColor="@color/shadow" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            style="@style/view_line"
+            android:layout_marginTop="15px"></View>
+
+    </LinearLayout>
+</layout>

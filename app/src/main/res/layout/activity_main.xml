@@ -53,7 +53,7 @@
             <RadioButton
                 android:id="@+id/rb_my"
                 style="@style/main_button_style"
-                android:drawableTop="@drawable/radiobutton_find_selector"
+                android:drawableTop="@drawable/radiobutton_center_selector"
                 android:text="@string/rb_mycenter" />
         </RadioGroup>
 

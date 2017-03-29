@@ -39,10 +39,10 @@ public class MainModel extends BaseModel<ActivityMainBinding, MainControlImpl> {
      */
     public void initViewPager() {
         MainActivity mainActivity = (MainActivity) UI;
-        MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(mainActivity.getSupportFragmentManager(), addListFragment());
-
+        ArrayList<Fragment> fragments = addListFragment();
+        MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(mainActivity.getSupportFragmentManager(),fragments );
         mBinder.viewPager.setAdapter(mainViewPagerAdapter);
-        mBinder.viewPager.setOffscreenPageLimit(2);
+        mBinder.viewPager.setOffscreenPageLimit(3);
 
     }
 

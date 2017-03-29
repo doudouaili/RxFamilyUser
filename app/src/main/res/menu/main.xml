@@ -2,8 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_share"
+        android:icon="@mipmap/ab_share"
+        android:orderInCategory="90"
+        android:title="分享"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="设置"
         app:showAsAction="never" />
+
 </menu>

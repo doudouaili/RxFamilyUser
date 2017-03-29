@@ -28,6 +28,8 @@
     <string name="edit_name">再次点击退出应用</string>
 
 
+
+
     <string name="home_movie">电影</string>
     <string name="home_recommend">推荐</string>
     <string name="home_tvLive">直播</string>
@@ -38,8 +40,6 @@
     <string name="item_home">推荐</string>
     <string name="item_more">更多</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

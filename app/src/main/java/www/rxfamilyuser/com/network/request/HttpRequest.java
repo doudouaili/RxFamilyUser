@@ -4,7 +4,7 @@ import java.util.Map;
 
 import io.reactivex.Observable;
 import www.rxfamilyuser.com.coom.Login.bean.UserBean;
-import www.rxfamilyuser.com.coom.drycargo.bean.DryReuseBean;
+import www.rxfamilyuser.com.coom.drycargo.bean.HomeBean;
 import www.rxfamilyuser.com.coom.drycargo.bean.TitleBean;
 
 /**
@@ -42,7 +42,7 @@ public interface HttpRequest {
      * @param map
      * @return
      */
-    Observable<DryReuseBean> infor(Map<String, Integer> map);
+    Observable<HomeBean> infor(Map<String, Integer> map);
 
 
     /**
@@ -50,5 +50,13 @@ public interface HttpRequest {
      *
      * @return
      */
-    Observable<TitleBean> getTitle();
+    Observable<TitleBean> getTitle(Map<String, Integer> map);
+
+    /**
+     * 通过专家id查询专家
+     *
+     * @param map
+     * @return
+     */
+    Observable<HomeBean.DataBean.ExpertBean> findExertId(Map<String, Integer> map);
 }

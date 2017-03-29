@@ -17,4 +17,5 @@ public interface IModelActivitiy<T extends ViewDataBinding> {
      * @return content上下文
      */
     Context getConText();
+
 }
