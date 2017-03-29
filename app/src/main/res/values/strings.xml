@@ -26,8 +26,8 @@
     <string name="rb_center">发现圈子</string>
     <string name="rb_mycenter">个人中心</string>
     <string name="edit_name">再次点击退出应用</string>
-
-
+    <string name="comm_reply">回复</string>
+    <string name="read_comm">写评论..</string>
 
 
     <string name="home_movie">电影</string>
@@ -39,7 +39,6 @@
     <string name="navigation_drawer_close">关闭侧边栏</string>
     <string name="item_home">推荐</string>
     <string name="item_more">更多</string>
-
 
 
 </resources>

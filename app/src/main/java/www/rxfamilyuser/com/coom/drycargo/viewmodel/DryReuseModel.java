@@ -27,6 +27,7 @@ public class DryReuseModel extends BaseModel<FragmentDryReuseBinding, DryReuseCo
     public ObservableArrayList<HomeBean.DataBean> mDataList = new ObservableArrayList();
     public ObservableInt mLayoutId = new ObservableInt(R.layout.reuse_item);
     public DryReuseAdapter mReuseAdapter = new DryReuseAdapter();
+
     private DryReuseFragment dryReuseFragment;
 
     @Override
@@ -107,7 +108,9 @@ public class DryReuseModel extends BaseModel<FragmentDryReuseBinding, DryReuseCo
     public void intent2Infor(View view, int position) {
         Intent intent = new Intent();
         intent.setClass(getContent(), InforActivity.class);
-        intent.putExtra("infor", mDataList.get(position).getInforBean());
+        intent.putExtra("infor_html", mDataList.get(position).getInforBean().getInfor_html());
+        intent.putExtra("infor_id", mDataList.get(position).getInforBean().getInfor_id());
+        intent.putExtra("title", mDataList.get(position).getInforBean().getInfor_title());
         getContent().startActivity(intent);
     }
 

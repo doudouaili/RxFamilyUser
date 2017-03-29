@@ -26,7 +26,7 @@
                 android:id="@+id/appbar"
                 android:layout_width="match_parent"
                 android:layout_height="96px">
-                <!--标题栏-->
+
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
@@ -35,18 +35,21 @@
                     app:layout_scrollFlags="scroll|enterAlways"
                     app:navigationIcon="@mipmap/arrow_back" />
 
+
             </android.support.design.widget.AppBarLayout>
 
-            <android.support.v4.widget.NestedScrollView
-                android:id="@+id/nested_scroll"
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:layout_marginTop="15px"
+                android:id="@+id/srLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:overScrollMode="never"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                android:layout_height="match_parent">
 
-                <RelativeLayout
+                <android.support.v4.widget.NestedScrollView
+                    android:id="@+id/nested_scroll"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -58,45 +61,80 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
 
+
+                        <com.jcodecraeer.xrecyclerview.XRecyclerView
+                            android:id="@+id/xrView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:adapter="@{model.mCommAdapter}"
+                            app:data="@{model.mCommList}"
+                            app:item="@{model.mCommLayout}" />
+
                     </LinearLayout>
 
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:text="第四节及的士速递" />
-                </RelativeLayout>
+                </android.support.v4.widget.NestedScrollView>
+            </android.support.v4.widget.SwipeRefreshLayout>
 
-            </android.support.v4.widget.NestedScrollView>
         </android.support.design.widget.CoordinatorLayout>
+
 
         <LinearLayout
             android:id="@+id/linear_bottom"
             android:layout_width="match_parent"
             android:layout_height="76px"
             android:layout_alignParentBottom="true"
-            android:background="#ccc"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@mipmap/ab_share" />
+            <View style="@style/view_line" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@mipmap/ab_share" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/comm_bottom"
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@mipmap/ab_share" />
+                <TextView
+                    android:id="@+id/tv_write_comm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="50px"
+                    android:layout_weight="1"
+                    android:background="@drawable/comm_bottom_shape"
+                    android:paddingBottom="5px"
+                    android:paddingLeft="30px"
+                    android:paddingRight="30px"
+                    android:paddingTop="5px"
+                    android:text="@string/read_comm"
+                    android:textColor="@color/huise" />
+
+                <ImageView
+                    android:id="@+id/iv_comm"
+                    android:layout_width="47px"
+                    android:layout_height="47px"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="30px"
+                    android:src="@mipmap/commemt" />
+
+                <ImageView
+                    android:id="@+id/iv_playtour"
+                    android:layout_width="47px"
+                    android:layout_height="47px"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="30px"
+                    android:layout_marginTop="3px"
+                    android:src="@mipmap/playtour" />
+
+                <ImageView
+                    android:id="@+id/iv_collect"
+                    android:layout_width="42px"
+                    android:layout_height="42px"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="30px"
+                    android:src="@mipmap/collection_new" />
+            </LinearLayout>
         </LinearLayout>
-
 
     </RelativeLayout>
 </layout>

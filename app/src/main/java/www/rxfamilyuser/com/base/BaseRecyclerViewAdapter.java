@@ -50,7 +50,9 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
 
     @BindingAdapter({"app:imageUrl"})
     public static void loadImage(ImageView view, String url) {
-        Glide.with(view.getContext()).load(url).asBitmap().fitCenter().into(view);
+        if (url != null)
+            Glide.with(view.getContext()).load(url).asBitmap().fitCenter().into(view);
+
     }
 
     public void setData(List<T> datas) {

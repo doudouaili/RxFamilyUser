@@ -12,4 +12,5 @@ public interface IInforControl {
 
     void findExpert(RequestCallBack callBack, Map<String, Integer> map, int tag);
 
+    void getCommentData(RequestCallBack callBack, Map<String, Integer> map, int i);
 }

@@ -9,6 +9,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import www.rxfamilyuser.com.coom.Login.bean.UserBean;
 import www.rxfamilyuser.com.coom.drycargo.bean.HomeBean;
+import www.rxfamilyuser.com.coom.drycargo.bean.InforCommentBean;
 import www.rxfamilyuser.com.coom.drycargo.bean.TitleBean;
 
 /**
@@ -81,5 +82,11 @@ public interface AppService {
     @FormUrlEncoded
     @POST("concentrantion/FindExpert")
     Observable<HomeBean.DataBean.ExpertBean> findExertId(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, Integer> map);
+
+    //getCommentData
+    @FormUrlEncoded
+    @POST("concentrantion/InforComment")
+    Observable<InforCommentBean> getCommentData(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, Integer> map);
+
 
 }

@@ -8,6 +8,7 @@ import io.reactivex.Observable;
 import www.rxfamilyuser.com.base.BaseApplication;
 import www.rxfamilyuser.com.coom.Login.bean.UserBean;
 import www.rxfamilyuser.com.coom.drycargo.bean.HomeBean;
+import www.rxfamilyuser.com.coom.drycargo.bean.InforCommentBean;
 import www.rxfamilyuser.com.coom.drycargo.bean.TitleBean;
 import www.rxfamilyuser.com.network.RetrofitManager;
 import www.rxfamilyuser.com.util.ConstantUtil;
@@ -17,7 +18,7 @@ import www.rxfamilyuser.com.util.NetUtil;
  * Created by ali on 2017/2/16.
  */
 
-public class HttpRequestImpl implements HttpRequest {
+public class HttpRequestImpl implements IHttpRequest {
 
     public static HttpRequestImpl httpRequest;
 
@@ -68,4 +69,10 @@ public class HttpRequestImpl implements HttpRequest {
     public Observable<HomeBean.DataBean.ExpertBean> findExertId(Map<String, Integer> map) {
         return RetrofitManager.getInstance().getAppService().findExertId(getCacheControl(), map);
     }
+
+    @Override
+    public Observable<InforCommentBean> getCommentData(Map<String, Integer> map) {
+        return RetrofitManager.getInstance().getAppService().getCommentData(getCacheControl(), map);
+    }
+
 }
