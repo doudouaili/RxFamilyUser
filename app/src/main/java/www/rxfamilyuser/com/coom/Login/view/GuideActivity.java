@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.jude.swipbackhelper.SwipeBackHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +37,10 @@ public class GuideActivity extends BaseActivity<ActivityGuideBinding, GuildeMode
 
     @Override
     public void initView() {
+        SwipeBackHelper.getCurrentPage(this)
+                .setSwipeBackEnable(false);
+        SwipeBackHelper.getCurrentPage(this).setDisallowInterceptTouchEvent(true);
+
         mViews = new ArrayList<View>();
         // 初始化引导页视图列表
         for (int i = 0; i < pics.length; i++) {

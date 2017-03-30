@@ -4,6 +4,7 @@ import android.view.Menu;
 import android.widget.RadioGroup;
 
 import com.blankj.utilcode.utils.ToastUtils;
+import com.jude.swipbackhelper.SwipeBackHelper;
 
 import www.rxfamilyuser.com.R;
 import www.rxfamilyuser.com.base.BaseActivity;
@@ -23,6 +24,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainModel> i
 
     @Override
     public void initView() {
+
+        SwipeBackHelper.getCurrentPage(this)
+                .setSwipeBackEnable(false);
+        SwipeBackHelper.getCurrentPage(this).setDisallowInterceptTouchEvent(true);
+
 
         mBinder.setMain(mModel);
 

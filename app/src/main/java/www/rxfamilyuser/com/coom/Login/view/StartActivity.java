@@ -1,6 +1,7 @@
 package www.rxfamilyuser.com.coom.Login.view;
 
 import com.blankj.utilcode.utils.SPUtils;
+import com.jude.swipbackhelper.SwipeBackHelper;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,6 +25,9 @@ public class StartActivity extends BaseActivity<ActivityStartBinding, StartModel
 
     @Override
     public void initView() {
+        SwipeBackHelper.getCurrentPage(this)
+                .setSwipeBackEnable(false);
+        SwipeBackHelper.getCurrentPage(this).setDisallowInterceptTouchEvent(true);
 
         Observable.timer(2, TimeUnit.SECONDS)
                 .subscribe(new Consumer<Long>() {

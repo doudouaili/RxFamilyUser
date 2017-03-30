@@ -17,6 +17,7 @@ import www.rxfamilyuser.com.coom.drycargo.bean.HomeBean;
 import www.rxfamilyuser.com.coom.drycargo.netcontrol.impl.DryReuseControlImpl;
 import www.rxfamilyuser.com.coom.drycargo.view.DryReuseFragment;
 import www.rxfamilyuser.com.coom.drycargo.view.InforActivity;
+import www.rxfamilyuser.com.coom.drycargo.view.JokeAvtivity;
 import www.rxfamilyuser.com.databinding.FragmentDryReuseBinding;
 
 /**
@@ -118,7 +119,9 @@ public class DryReuseModel extends BaseModel<FragmentDryReuseBinding, DryReuseCo
      * 跳转到笑话
      */
     public void intent2Joke() {
-
+        Intent intent = new Intent();
+        intent.setClass(getContent(), JokeAvtivity.class);
+        getContent().startActivity(intent);
     }
 
     /**

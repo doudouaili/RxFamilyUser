@@ -10,10 +10,11 @@
 
         <ImageView
             android:id="@+id/titlebar_iv_left"
-            android:layout_width="96px"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:padding="15px"
+            android:layout_marginLeft="20px"
+            android:src="@mipmap/arrow_back"
             android:visibility="gone" />
 
         <TextView
@@ -46,14 +47,13 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_px30" />
 
+
         <TextView
             android:id="@+id/titlebar_tv"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:singleLine="true"
             android:textColor="@color/white"
             android:textSize="@dimen/_px38" />
 

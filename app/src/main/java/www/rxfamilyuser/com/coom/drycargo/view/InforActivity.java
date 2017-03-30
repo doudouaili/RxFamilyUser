@@ -36,6 +36,7 @@ public class InforActivity extends BaseActivity<ActivityInforBinding, InforModel
 
     @Override
     public void initView() {
+
         mInforId = getIntent().getIntExtra("infor_id", 0);
         mInforHtml = getIntent().getStringExtra("infor_html");
         mTitle = getIntent().getStringExtra("title");
@@ -124,7 +125,7 @@ public class InforActivity extends BaseActivity<ActivityInforBinding, InforModel
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 if (scrollY > oldScrollY) {//下滑
-                    AnimationUtil.with().moveToViewBottom(mBinder.linearBottom, SANIMATION_TIME);
+                    AnimationUtil.with().moveToViewBottom(mBinder.linearBottom, SANIMATION_TIME);//显示
                 } else {
                     AnimationUtil.with().bottomMoveToViewLocation(mBinder.linearBottom, SANIMATION_TIME);
                 }

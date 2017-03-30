@@ -15,7 +15,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/SlideTheme">
         <activity
             android:name=".coom.Login.view.StartActivity"
             android:theme="@style/MyFullScreenTheme">
@@ -35,11 +35,14 @@
 
         <activity
             android:name=".coom.Login.view.MainActivity"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleInstance"
+            android:theme="@style/MainTheme" />
+
         <activity android:name=".coom.Login.view.LoginActivity" />
         <activity
             android:name=".coom.Login.view.GuideActivity"
             android:theme="@style/MyFullScreenTheme" />
+
         <activity android:name=".coom.Login.view.RegisterActivity" />
         <activity android:name=".coom.drycargo.view.InforActivity" />
         <activity android:name=".coom.drycargo.view.JokeAvtivity"></activity>

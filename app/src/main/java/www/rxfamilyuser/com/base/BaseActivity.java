@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 
+import com.jude.swipbackhelper.SwipeBackHelper;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.lang.reflect.ParameterizedType;
@@ -22,6 +23,14 @@ public abstract class BaseActivity<T extends ViewDataBinding, M extends BaseMode
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //滑动删除库初始化
+        SwipeBackHelper.onCreate(this);
+        SwipeBackHelper.getCurrentPage(this)
+                .setSwipeBackEnable(true)
+                .setSwipeSensitivity(0.5f)
+                .setSwipeRelateEnable(true)
+                .setSwipeRelateOffset(300);
+
         mBinder = DataBindingUtil.setContentView(this, getLayoutId());
         AppManagerUtils.getAppManager().addActivity(this);
 
@@ -82,6 +91,7 @@ public abstract class BaseActivity<T extends ViewDataBinding, M extends BaseMode
     protected void onDestroy() {
         super.onDestroy();
         mModel.onDestroy();
+        SwipeBackHelper.onDestroy(this);
         AppManagerUtils.getAppManager().finishActivity(this);
     }
 
@@ -94,5 +104,11 @@ public abstract class BaseActivity<T extends ViewDataBinding, M extends BaseMode
         Intent intent = new Intent(getApplicationContext(), tarActivity);
         startActivity(intent);
     }
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        SwipeBackHelper.onPostCreate(this);
+    }
+
 
 }
