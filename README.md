@@ -17,11 +17,11 @@ PS:gif效果太差,项目中有apk,可自行安装.
 -------
   * 仿Ios右滑界面消失-->com.jude:swipebackhelper:3.1.2<br>
   * 下拉刷新-->com.jcodecraeer:xrecyclerview:1.3.2<br>
-  * Android5.0控件-->一系列<br>
-  * 数据库-->未确定<br>
+  * Android5.0控件-->一系列<br>
+  * 数据库-->未确定<br>
   * 网络请求 -->retrofit2+rxjava2<br>
   * Android屏幕适配-->com.zhy:autolayout:1.4.5<br>
-  * 注册短信-->share短信服务<br>
+  * 注册短信-->share短信服务<br>
   * Utils工具类-->com.blankj:utilcode:1.3.6<br>
   * 加载图片-->com.github.bumptech.glide:glide:3.7.0<br>
       
