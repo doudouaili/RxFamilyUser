@@ -7,6 +7,8 @@ RxFamilyUser
 * 扣扣：958028993
 * 扣群：570278493
 ----
+服务端传送门:https://github.com/doudouaili/AndroidConcentration<br>
+
 应用截图:
 -------
 ![显示错误](https://github.com/doudouaili/RxFamilyUser/raw/master/gif/rxfamily.gif)<br>
