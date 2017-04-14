@@ -8,6 +8,7 @@ RxFamilyUser
 * 扣群：570278493
 ----
 服务端传送门:https://github.com/doudouaili/AndroidConcentration<br>
+特别鸣谢万里大屌<Github>:https://github.com/waddwaw<br>
 
 应用截图:
 -------
