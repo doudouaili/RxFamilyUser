@@ -71,50 +71,6 @@ public class DryReuseFragment extends BaseFragment<FragmentDryReuseBinding, DryR
                     }
                 });
 
-       /* LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-
-        mBinder.xrView.setLayoutManager(linearLayoutManager);
-        mBinder.xrView.setPullRefreshEnabled(false);
-        mBinder.xrView.setLoadingMoreEnabled(false);
-
-        mBinder.srLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);*/
-
-
-     /*   mBinder.xrView.setLoadingListener(new XRecyclerView.LoadingListener() {
-            @Override
-            public void onRefresh() {
-
-            }
-
-            @Override
-            public void onLoadMore() {
-                mPage++;
-                mModel.getDryData(mType, mPage);
-            }
-        });*/
-
-      /*  mBinder.srLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                mBinder.srLayout.setRefreshing(true);
-                mModel.getDryData(mType, mPage);
-
-            }
-        });
-
-        mBinder.srLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                //网络请求
-                mPage = 10;
-                mModel.getDryData(mType, mPage);
-            }
-        });*/
-
 
         mModel.mReuseAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
             @Override
