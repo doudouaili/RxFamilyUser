@@ -1,3 +1,0 @@
-# RxFamilyUser
-框架使用retrofit2与rxjava2+databing一个开源项目.
-服务端也是我写的,进度有点慢.需要服务端源码的联系我958028993.
