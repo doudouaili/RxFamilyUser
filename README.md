@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-=======
-RxFamilyUser
-====  
->>>>>>> origin/master
