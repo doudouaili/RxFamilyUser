@@ -21,5 +21,11 @@
     <color name="picr_tj">#FA5A5D</color>
     <color name="comm_name">#346195</color>
     <color name="comm_bottom">#F4F5F6</color>
+    <color name="circle_name">#151616</color>
+    <color name="circle_title">#404040</color>
+    <color name="circle_context">#606263</color>
+    <color name="centen_bj">#F2F4F7</color>
+    <color name="centen_text">#707070</color>
+
 
 </resources>

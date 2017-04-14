@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Android干货</string>
+    <string name="app_name">Android</string>
     <string name="login">登录</string>
     <string name="register">注册</string>
     <string name="find_password">找回密码</string>
@@ -21,13 +21,18 @@
     <string name="ed_phone">请输入手机号</string>
 
 
-    <string name="rb_home">干货集中营</string>
-    <string name="rb_live">互动中心</string>
-    <string name="rb_center">发现圈子</string>
-    <string name="rb_mycenter">个人中心</string>
+    <string name="rb_home">干货</string>
+    <string name="rb_live">互动</string>
+    <string name="rb_center">消息</string>
+    <string name="rb_mycenter">我的</string>
     <string name="edit_name">再次点击退出应用</string>
     <string name="comm_reply">回复</string>
-    <string name="read_comm">写评论..</string>
+    <string name="read_comm">期待您的神回复..</string>
+    <string name="login_hind">点击登录,体验更多功能</string>
+    <string name="login_register">注册/登录</string>
+    <string name="night_mode">夜间模式</string>
+    <string name="setting">设置</string>
+
 
 
     <string name="home_movie">电影</string>
@@ -39,6 +44,9 @@
     <string name="navigation_drawer_close">关闭侧边栏</string>
     <string name="item_home">推荐</string>
     <string name="item_more">更多</string>
+
+    <string name="onItemClickListener">点击事件没有初始化~~</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

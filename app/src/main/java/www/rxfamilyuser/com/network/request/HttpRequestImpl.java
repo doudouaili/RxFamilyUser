@@ -7,9 +7,12 @@ import java.util.Map;
 import io.reactivex.Observable;
 import www.rxfamilyuser.com.base.BaseApplication;
 import www.rxfamilyuser.com.coom.Login.bean.UserBean;
+import www.rxfamilyuser.com.coom.circle.Bean.CircleBean;
 import www.rxfamilyuser.com.coom.drycargo.bean.HomeBean;
 import www.rxfamilyuser.com.coom.drycargo.bean.InforCommentBean;
+import www.rxfamilyuser.com.coom.drycargo.bean.JokeListBean;
 import www.rxfamilyuser.com.coom.drycargo.bean.TitleBean;
+import www.rxfamilyuser.com.coom.find.bean.MessageBean;
 import www.rxfamilyuser.com.network.RetrofitManager;
 import www.rxfamilyuser.com.util.ConstantUtil;
 import www.rxfamilyuser.com.util.NetUtil;
@@ -73,6 +76,23 @@ public class HttpRequestImpl implements IHttpRequest {
     @Override
     public Observable<InforCommentBean> getCommentData(Map<String, Integer> map) {
         return RetrofitManager.getInstance().getAppService().getCommentData(getCacheControl(), map);
+    }
+
+    @Override
+    public Observable<JokeListBean> getJokeCommentData(Map<String, Integer> map) {
+        return RetrofitManager.getInstance().getAppService().getJokeCommentData(getCacheControl(), map);
+    }
+
+    @Override
+    public Observable<CircleBean> getInvitationData(Map<String, Integer> map) {
+        return RetrofitManager.getInstance().getAppService().getInvitationData(getCacheControl(), map);
+    }
+
+    @Override
+    public Observable<MessageBean> getMessageData(Map<String, Integer> map) {
+
+        return RetrofitManager.getInstance().getAppService().getMessageData(getCacheControl(), map);
+
     }
 
 }

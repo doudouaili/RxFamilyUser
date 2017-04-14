@@ -15,7 +15,8 @@ public class PerCenterFragment extends BaseFragment<FragmentPerCenterBinding, Pe
 
     @Override
     public void initView() {
-
+        mBinder.setModel(mModel);
+        mBinder.toolbar.setTitle(getString(R.string.rb_mycenter));
     }
 
 }

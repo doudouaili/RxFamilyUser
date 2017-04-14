@@ -8,9 +8,12 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import www.rxfamilyuser.com.coom.Login.bean.UserBean;
+import www.rxfamilyuser.com.coom.circle.Bean.CircleBean;
 import www.rxfamilyuser.com.coom.drycargo.bean.HomeBean;
 import www.rxfamilyuser.com.coom.drycargo.bean.InforCommentBean;
+import www.rxfamilyuser.com.coom.drycargo.bean.JokeListBean;
 import www.rxfamilyuser.com.coom.drycargo.bean.TitleBean;
+import www.rxfamilyuser.com.coom.find.bean.MessageBean;
 
 /**
  * Created by ali on 2017/2/16.
@@ -63,7 +66,7 @@ public interface AppService {
     @POST("concentrantion/Infor")
     Observable<HomeBean> infor(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, Integer> map);
 
-   /**
+    /**
      * 获取干货标题
      *
      * @param cacheControl
@@ -83,10 +86,47 @@ public interface AppService {
     @POST("concentrantion/FindExpert")
     Observable<HomeBean.DataBean.ExpertBean> findExertId(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, Integer> map);
 
-    //getCommentData
+    /**
+     * 获取评论列表
+     *
+     * @param cacheControl
+     * @param map
+     * @return
+     */
     @FormUrlEncoded
     @POST("concentrantion/InforComment")
     Observable<InforCommentBean> getCommentData(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, Integer> map);
 
+    /**
+     * 获取单个乐趣该评论
+     *
+     * @param cacheControl
+     * @param map
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("concentrantion/JokeOne")
+    Observable<JokeListBean> getJokeCommentData(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, Integer> map);
 
+    /**
+     * 获取互动中心列表
+     *
+     * @param cacheControl
+     * @param map
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("invitation/invita")
+    Observable<CircleBean> getInvitationData(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, Integer> map);
+
+    /**
+     * 消息
+     *
+     * @param cacheControl
+     * @param map
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("message/message")
+    Observable<MessageBean> getMessageData(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, Integer> map);
 }

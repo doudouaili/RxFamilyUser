@@ -25,9 +25,10 @@ public class JokeAvtivity extends BaseActivity<ActivityJokeBinding, JokeModel> {
     public void initView() {
         final JokeViewPagerAdapter jokeViewPagerAdapter = new JokeViewPagerAdapter(getSupportFragmentManager());
         mBinder.viewpagerJoke.setAdapter(jokeViewPagerAdapter);
+        final int jokeId = getIntent().getIntExtra("jokeId", 0);
 
-        jokeViewPagerAdapter.addItem(new JokeFragment(1));
-        jokeViewPagerAdapter.addItem(new JokeFragment(2));
+        jokeViewPagerAdapter.addItem(new JokeFragment(jokeId));
+        jokeViewPagerAdapter.addItem(new JokeFragment(jokeId + 1));
 
         mBinder.viewpagerJoke.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -42,7 +43,7 @@ public class JokeAvtivity extends BaseActivity<ActivityJokeBinding, JokeModel> {
                     SwipeBackHelper.getCurrentPage(JokeAvtivity.this).setDisallowInterceptTouchEvent(false);
                 } else {
                     SwipeBackHelper.getCurrentPage(JokeAvtivity.this).setDisallowInterceptTouchEvent(true);
-                    jokeViewPagerAdapter.addItem(new JokeFragment(position + 2));
+                    jokeViewPagerAdapter.addItem(new JokeFragment(jokeId + position + 2));
                 }
             }
 

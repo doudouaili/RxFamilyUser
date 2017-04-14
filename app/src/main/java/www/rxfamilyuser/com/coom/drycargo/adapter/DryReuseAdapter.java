@@ -12,6 +12,7 @@ import www.rxfamilyuser.com.databinding.ItemExpertReuseBinding;
 import www.rxfamilyuser.com.databinding.ItemJokeReuseBinding;
 import www.rxfamilyuser.com.databinding.ItemWelfareReuseBinding;
 import www.rxfamilyuser.com.databinding.ReuseItemBinding;
+import www.rxfamilyuser.com.util.GlideUtil;
 import www.rxfamilyuser.com.widget.OnRecyclerViewItemClickListener;
 
 import static www.rxfamilyuser.com.R.layout.item_expert_reuse;
@@ -24,7 +25,6 @@ import static www.rxfamilyuser.com.R.layout.item_welfare_reuse;
 public class DryReuseAdapter extends BaseRecyclerViewAdapter<HomeBean.DataBean> {
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
-    private boolean animateItems = false;
 
     /**
      * 根据类型加载不同布局
@@ -86,6 +86,18 @@ public class DryReuseAdapter extends BaseRecyclerViewAdapter<HomeBean.DataBean> 
             case 2:
                 ItemJokeReuseBinding itemJokeReuseBinding = (ItemJokeReuseBinding) vdBinding;
                 itemJokeReuseBinding.setDataBean(mDataList.get(position));
+
+                if (mDataList.get(position).getJokeBean().getJoke_img().contains(".gif")) {
+
+                    GlideUtil.getInstance().loadGifImage(mContext,
+                            mDataList.get(position).getJokeBean().getJoke_img(),
+                            itemJokeReuseBinding.ivPhotoJoke);
+                } else {
+                    GlideUtil.getInstance().loadImage(mContext,
+                            mDataList.get(position).getJokeBean().getJoke_img(),
+                            itemJokeReuseBinding.ivPhotoJoke);
+                }
+
                 break;
             case 3:
                 ItemExpertReuseBinding itemExpertReuseBinding = (ItemExpertReuseBinding) vdBinding;
@@ -102,7 +114,9 @@ public class DryReuseAdapter extends BaseRecyclerViewAdapter<HomeBean.DataBean> 
         vdBinding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mOnItemClickListener.onItemClick(v, position);
+                if (mOnItemClickListener != null)
+                    mOnItemClickListener.onItemClick(v, position);
+
             }
         });
     }

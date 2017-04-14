@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="model"
+            type="www.rxfamilyuser.com.coom.find.bean.MessageBean.DataBean" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_photo_mess"
+                android:layout_width="100px"
+                android:layout_height="100px"
+                android:layout_margin="20px"
+                android:src="@mipmap/default_user"
+                app:imageUrl="@{model.mes_icon}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_toRightOf="@+id/iv_photo_mess"
+                android:text="@{model.mes_title}"
+                android:textColor="@color/circle_title"
+                android:textSize="@dimen/_px32" />
+
+            <ImageView
+                android:id="@+id/iv_right_arrow"
+                android:layout_width="60px"
+                android:layout_height="60px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15px"
+                android:src="@mipmap/right_arrow" />
+
+            <ImageView
+                android:layout_width="50px"
+                android:layout_height="50px"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/iv_right_arrow"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="40px"
+                android:src="@mipmap/red_dot"
+                android:visibility="@{model.mes_newpm ==0 ?View.GONE:View.VISIBLE}" />
+        </RelativeLayout>
+
+        <View
+            style="@style/view_line"
+            android:layout_marginLeft="25px" />
+
+    </LinearLayout>
+</layout>

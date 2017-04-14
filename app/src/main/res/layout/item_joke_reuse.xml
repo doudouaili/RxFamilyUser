@@ -37,8 +37,7 @@
                 android:layout_marginLeft="20px"
                 android:layout_marginRight="50px"
                 android:layout_marginTop="20px"
-                android:src="@mipmap/image_def"
-                app:imageUrl="@{DataBean.jokeBean.joke_img}" />
+                android:src="@mipmap/image_def"/>
 
             <TextView
                 android:id="@+id/tv_context_joke"

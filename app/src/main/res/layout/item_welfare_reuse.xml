@@ -24,6 +24,7 @@
             android:textColor="@color/shadow" />
 
         <ImageView
+            android:id="@+id/iv_photo_w"
             android:layout_width="match_parent"
             android:layout_height="400px"
             android:layout_marginBottom="10px"

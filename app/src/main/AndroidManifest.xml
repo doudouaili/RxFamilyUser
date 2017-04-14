@@ -37,15 +37,15 @@
             android:name=".coom.Login.view.MainActivity"
             android:launchMode="singleInstance"
             android:theme="@style/MainTheme" />
-
         <activity android:name=".coom.Login.view.LoginActivity" />
         <activity
             android:name=".coom.Login.view.GuideActivity"
             android:theme="@style/MyFullScreenTheme" />
-
         <activity android:name=".coom.Login.view.RegisterActivity" />
         <activity android:name=".coom.drycargo.view.InforActivity" />
-        <activity android:name=".coom.drycargo.view.JokeAvtivity"></activity>
+        <activity android:name=".coom.drycargo.view.JokeAvtivity" />
+        <activity android:name=".coom.drycargo.view.LargeActivity" />
+        <activity android:name=".coom.drycargo.view.DanielDetailsActivity"></activity>
     </application>
 
 </manifest>

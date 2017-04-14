@@ -34,27 +34,24 @@
             <RadioButton
                 android:id="@+id/rb_home"
                 style="@style/main_button_style"
+                android:layout_gravity="center_vertical"
                 android:checked="true"
-                android:drawableTop="@drawable/radiobutton_dry_selector"
-                android:text="@string/rb_home" />
+                android:drawableTop="@drawable/radiobutton_dry_selector" />
 
             <RadioButton
                 android:id="@+id/rb_live"
                 style="@style/main_button_style"
-                android:drawableTop="@drawable/radiobutton_cir_selector"
-                android:text="@string/rb_live" />
+                android:drawableTop="@drawable/radiobutton_cir_selector" />
 
             <RadioButton
                 android:id="@+id/rb_center"
                 style="@style/main_button_style"
-                android:drawableTop="@drawable/radiobutton_find_selector"
-                android:text="@string/rb_center" />
+                android:drawableTop="@drawable/radiobutton_find_selector" />
 
             <RadioButton
                 android:id="@+id/rb_my"
                 style="@style/main_button_style"
-                android:drawableTop="@drawable/radiobutton_center_selector"
-                android:text="@string/rb_mycenter" />
+                android:drawableTop="@drawable/radiobutton_center_selector" />
         </RadioGroup>
 
     </LinearLayout>

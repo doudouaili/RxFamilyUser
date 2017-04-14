@@ -4,9 +4,12 @@ import java.util.Map;
 
 import io.reactivex.Observable;
 import www.rxfamilyuser.com.coom.Login.bean.UserBean;
+import www.rxfamilyuser.com.coom.circle.Bean.CircleBean;
 import www.rxfamilyuser.com.coom.drycargo.bean.HomeBean;
 import www.rxfamilyuser.com.coom.drycargo.bean.InforCommentBean;
+import www.rxfamilyuser.com.coom.drycargo.bean.JokeListBean;
 import www.rxfamilyuser.com.coom.drycargo.bean.TitleBean;
+import www.rxfamilyuser.com.coom.find.bean.MessageBean;
 
 /**
  * Created by ali on 2017/2/16.
@@ -68,4 +71,29 @@ public interface IHttpRequest {
      * @return
      */
     Observable<InforCommentBean> getCommentData(Map<String, Integer> map);
+
+    /**
+     * 获取单个乐趣和改评论
+     *
+     * @param map
+     * @return
+     */
+    Observable<JokeListBean> getJokeCommentData(Map<String, Integer> map);
+
+    /**
+     * 互动中心
+     *
+     * @param map
+     * @return
+     */
+    Observable<CircleBean> getInvitationData(Map<String, Integer> map);
+
+    /**
+     * 消息
+     *
+     * @param map
+     * @return
+     */
+    Observable<MessageBean> getMessageData(Map<String, Integer> map);
+
 }

@@ -11,6 +11,7 @@ import www.rxfamilyuser.com.R;
 import www.rxfamilyuser.com.base.BaseFragment;
 import www.rxfamilyuser.com.coom.drycargo.viewmodel.DryReuseModel;
 import www.rxfamilyuser.com.databinding.FragmentDryReuseBinding;
+import www.rxfamilyuser.com.util.XRecyclerviewUtis;
 import www.rxfamilyuser.com.widget.OnRecyclerViewItemClickListener;
 
 @SuppressLint("ValidFragment")
@@ -36,7 +37,41 @@ public class DryReuseFragment extends BaseFragment<FragmentDryReuseBinding, DryR
     public void initView() {
 
         mBinder.setModel(mModel);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+
+        new XRecyclerviewUtis(mBinder.xrView, mBinder.srLayout, getContext())
+                .setLayoutManager(LinearLayoutManager.VERTICAL)
+                .setPullRefreshEnabled(false)
+                .setLoadingMoreEnabled(false)
+                .swipeLayouSetColorSchemeResources()
+                .setLoadingListener(new XRecyclerView.LoadingListener() {
+                    @Override
+                    public void onRefresh() {
+
+                    }
+
+                    @Override
+                    public void onLoadMore() {
+                        mPage++;
+                        mModel.getDryData(mType, mPage);
+                    }
+                })
+                .swipeLayouPost(new Runnable() {
+                    @Override
+                    public void run() {
+                        mBinder.srLayout.setRefreshing(true);
+                        mModel.getDryData(mType, mPage);
+                    }
+                })
+                .swipeLayouSetOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        //网络请求
+                        mPage = 10;
+                        mModel.getDryData(mType, mPage);
+                    }
+                });
+
+       /* LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
         mBinder.xrView.setLayoutManager(linearLayoutManager);
@@ -46,10 +81,10 @@ public class DryReuseFragment extends BaseFragment<FragmentDryReuseBinding, DryR
         mBinder.srLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+                android.R.color.holo_red_light);*/
 
 
-        mBinder.xrView.setLoadingListener(new XRecyclerView.LoadingListener() {
+     /*   mBinder.xrView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
 
@@ -60,9 +95,9 @@ public class DryReuseFragment extends BaseFragment<FragmentDryReuseBinding, DryR
                 mPage++;
                 mModel.getDryData(mType, mPage);
             }
-        });
+        });*/
 
-        mBinder.srLayout.post(new Runnable() {
+      /*  mBinder.srLayout.post(new Runnable() {
             @Override
             public void run() {
                 mBinder.srLayout.setRefreshing(true);
@@ -78,7 +113,7 @@ public class DryReuseFragment extends BaseFragment<FragmentDryReuseBinding, DryR
                 mPage = 10;
                 mModel.getDryData(mType, mPage);
             }
-        });
+        });*/
 
 
         mModel.mReuseAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
@@ -88,7 +123,7 @@ public class DryReuseFragment extends BaseFragment<FragmentDryReuseBinding, DryR
                 switch (itemViewType) {
                     case 1:
 
-                        mModel.intent2Infor(view,position);
+                        mModel.intent2Infor(position);
                         /* Intent intent = new Intent(getContext(), InforActivity.class);
                         intent.putExtra("url", mModel.mDataList.get(position).getInforBean().getInfor_img());
                         startActivity(intent);
@@ -98,13 +133,13 @@ public class DryReuseFragment extends BaseFragment<FragmentDryReuseBinding, DryR
                         ActivityCompat.startActivity(getContext(), intent, options.toBundle());*/
                         break;
                     case 2:
-                        mModel.intent2Joke();
+                        mModel.intent2Joke(position);
                         break;
                     case 3:
-                        mModel.intent2Expert();
+                        mModel.intent2Expert(position);
                         break;
                     case 4:
-                        mModel.intent2Welfare();
+                        mModel.intent2Welfare(position);
                         break;
                 }
             }

@@ -3,7 +3,6 @@ package www.rxfamilyuser.com.coom.drycargo.viewmodel;
 import android.content.Intent;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableInt;
-import android.view.View;
 
 import com.blankj.utilcode.utils.ToastUtils;
 
@@ -15,9 +14,11 @@ import www.rxfamilyuser.com.base.BaseModel;
 import www.rxfamilyuser.com.coom.drycargo.adapter.DryReuseAdapter;
 import www.rxfamilyuser.com.coom.drycargo.bean.HomeBean;
 import www.rxfamilyuser.com.coom.drycargo.netcontrol.impl.DryReuseControlImpl;
+import www.rxfamilyuser.com.coom.drycargo.view.DanielDetailsActivity;
 import www.rxfamilyuser.com.coom.drycargo.view.DryReuseFragment;
 import www.rxfamilyuser.com.coom.drycargo.view.InforActivity;
 import www.rxfamilyuser.com.coom.drycargo.view.JokeAvtivity;
+import www.rxfamilyuser.com.coom.drycargo.view.LargeActivity;
 import www.rxfamilyuser.com.databinding.FragmentDryReuseBinding;
 
 /**
@@ -103,10 +104,9 @@ public class DryReuseModel extends BaseModel<FragmentDryReuseBinding, DryReuseCo
     /**
      * 跳转到资讯详情
      *
-     * @param view
      * @param position
      */
-    public void intent2Infor(View view, int position) {
+    public void intent2Infor(int position) {
         Intent intent = new Intent();
         intent.setClass(getContent(), InforActivity.class);
         intent.putExtra("infor_html", mDataList.get(position).getInforBean().getInfor_html());
@@ -118,23 +118,31 @@ public class DryReuseModel extends BaseModel<FragmentDryReuseBinding, DryReuseCo
     /**
      * 跳转到笑话
      */
-    public void intent2Joke() {
+    public void intent2Joke(int position) {
         Intent intent = new Intent();
         intent.setClass(getContent(), JokeAvtivity.class);
+        intent.putExtra("jokeId",mDataList.get(position).getJokeBean().getJoke_id());
         getContent().startActivity(intent);
     }
 
     /**
      * 跳转到专家详情
      */
-    public void intent2Expert() {
+    public void intent2Expert(int position) {
+        Intent intent = new Intent();
+        intent.setClass(getContent(), DanielDetailsActivity.class);
+        intent.putExtra("exerptId", mDataList.get(position).getExpertBean().getExpert_id());
+        getContent().startActivity(intent);
 
     }
 
     /**
      * 跳转到福利
      */
-    public void intent2Welfare() {
-
+    public void intent2Welfare(int position) {
+        Intent intent = new Intent();
+        intent.setClass(getContent(), LargeActivity.class);
+        intent.putExtra("url", mDataList.get(position).getWelfareBean().getWelfare_img());
+        getContent().startActivity(intent);
     }
 }

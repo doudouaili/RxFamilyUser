@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.List;
 
+import www.rxfamilyuser.com.util.GlideUtil;
 import www.rxfamilyuser.com.util.Utils;
 
 /**
@@ -51,8 +51,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
     @BindingAdapter({"app:imageUrl"})
     public static void loadImage(ImageView view, String url) {
         if (url != null)
-            Glide.with(view.getContext()).load(url).asBitmap().fitCenter().into(view);
-
+            GlideUtil.getInstance().loadImage(view.getContext(), url, view);
     }
 
     public void setData(List<T> datas) {

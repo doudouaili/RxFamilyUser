@@ -37,7 +37,7 @@ public class RetrofitManager {
         if (DebugMode) {
             HTTP_URL = "http://192.168.1.109:8080/";
         } else {
-            HTTP_URL = "http://112.74.104.213:8080/www.concentration.com/";
+            HTTP_URL = "http://47.93.50.208:8080/www.concentration.com/";
         }
     }
 
@@ -127,13 +127,10 @@ public class RetrofitManager {
         return retrofitManager;
     }
 
-
     public AppService getAppService() {
         if (mMallService != null) {
             return mMallService;
         }
         return null;
     }
-
-
 }

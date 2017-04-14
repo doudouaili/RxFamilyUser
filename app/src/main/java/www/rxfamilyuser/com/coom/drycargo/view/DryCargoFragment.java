@@ -21,9 +21,8 @@ public class DryCargoFragment extends BaseFragment<FragmentDryCargoBinding, DryC
     public void initView() {
 
         mModel.getTitle();
-        mBinder.toolbar.setTitle("干货集中营");
+        mBinder.toolbar.setTitle(getString(R.string.rb_home));
         showEnterAnimation();
-
     }
 
     private void showEnterAnimation() {

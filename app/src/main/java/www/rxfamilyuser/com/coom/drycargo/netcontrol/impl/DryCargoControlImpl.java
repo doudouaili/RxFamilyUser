@@ -2,7 +2,6 @@ package www.rxfamilyuser.com.coom.drycargo.netcontrol.impl;
 
 import java.util.Map;
 
-import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -24,12 +23,11 @@ import www.rxfamilyuser.com.util.ConstantUtil;
 public class DryCargoControlImpl extends BaseNetControl implements IDryCargoControl {
 
     @Override
-    public void getTitile(final RequestCallBack callBack, Map<String, Integer> map,final int tag) {
+    public void getTitile(final RequestCallBack callBack, Map<String, Integer> map, final int tag) {
         callBack.beforeRequest(tag);
-        Observable<TitleBean> title = HttpRequestImpl.getInstance()
-                .getTitle(map);
-
-        title.subscribeOn(Schedulers.io())
+        HttpRequestImpl.getInstance()
+                .getTitle(map)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<TitleBean>() {
                     @Override

@@ -1,26 +1,169 @@
-<layout>
-
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="model"
-            type="www.rxfamilyuser.com.coom.personal.viewmodel.PerCenterViewModel"/>
+            type="www.rxfamilyuser.com.coom.personal.viewmodel.PerCenterViewModel" />
     </data>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context="www.rxfamilyuser.com.coom.find.view.FindFragment">
+        android:orientation="vertical"
+        tools:context="www.rxfamilyuser.com.coom.find.view.MessageFragment">
 
-        <TextView
-            android:layout_centerInParent="true"
-            android:textSize="@dimen/_px34"
-            android:text="此模块下次开发"
-            android:textColor="@color/main_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    </RelativeLayout>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|enterAlways" />
+
+        </android.support.design.widget.AppBarLayout>
+
+
+        <!--未登录布局-->
+        <LinearLayout
+            android:id="@+id/linear_login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/centen_bj"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40px"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+
+                    <View style="@style/view_line" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="30px"
+                        android:text="@string/login_hind"
+                        android:textColor="@color/centen_text"
+                        android:textSize="@dimen/_px30" />
+
+                    <Button
+                        android:id="@+id/btn_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="60px"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="30px"
+                        android:background="@drawable/btn_bj_shape"
+                        android:text="@string/login_register"
+                        android:textColor="@color/colorAccent" />
+
+                    <View
+                        style="@style/view_line"
+                        android:layout_marginTop="30px" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40px"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <View style="@style/view_line" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100px">
+
+                        <ImageView
+                            android:id="@+id/iv_nightmode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="20px"
+                            android:src="@mipmap/nightmode_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="50px"
+                            android:layout_toRightOf="@+id/iv_nightmode"
+                            android:text="@string/night_mode"
+                            android:textColor="@color/centen_text" />
+
+                        <CheckBox
+                            android:id="@+id/check_box"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="20px"
+                            android:button="@drawable/checkbox_selector" />
+
+                    </RelativeLayout>
+
+                    <View
+                        style="@style/view_line"
+                        android:layout_marginLeft="120px" />
+
+                    <RelativeLayout
+                        android:id="@+id/relative_setting"
+                        android:layout_width="match_parent"
+                        android:layout_height="100px">
+
+                        <ImageView
+                            android:id="@+id/iv_setting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="20px"
+                            android:src="@mipmap/setting_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="50px"
+                            android:layout_toRightOf="@+id/iv_setting"
+                            android:text="@string/setting"
+                            android:textColor="@color/centen_text" />
+
+                        <ImageView
+                            android:layout_width="50px"
+                            android:layout_height="50px"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="15px"
+                            android:src="@mipmap/right_arrow" />
+
+                    </RelativeLayout>
+
+                    <View style="@style/view_line" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+        <!--未登录结束-->
+
+
+    </LinearLayout>
 
 </layout>

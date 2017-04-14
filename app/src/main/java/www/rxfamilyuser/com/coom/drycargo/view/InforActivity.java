@@ -72,7 +72,7 @@ public class InforActivity extends BaseActivity<ActivityInforBinding, InforModel
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 

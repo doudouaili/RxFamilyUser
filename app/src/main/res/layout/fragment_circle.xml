@@ -8,21 +8,66 @@
     </data>
 
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context="www.rxfamilyuser.com.coom.find.view.FindFragment">
+        android:orientation="vertical"
+        tools:context="www.rxfamilyuser.com.coom.find.view.MessageFragment">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="此模块正在开发"
-            android:textColor="@color/main_text"
-            android:textSize="@dimen/_px34" />
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    </RelativeLayout>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|enterAlways" />
+
+        </android.support.design.widget.AppBarLayout>
+
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/sr_circle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/frg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|right|bottom"
+                    android:layout_marginBottom="200px"
+                    android:layout_marginRight="80px"
+                    android:src="@mipmap/ftb_ried"
+                    android:transitionName="justdoit"
+                    app:layout_behavior="www.rxfamilyuser.com.widget.ScrollAwareFABBehavior" />
+
+                <com.jcodecraeer.xrecyclerview.XRecyclerView
+                    android:id="@+id/xr_circle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:adapter="@{model.mAdapter}"
+                    app:data="@{model.mDataList}"
+                    app:item="@{model.mLayoutId}">
+
+                </com.jcodecraeer.xrecyclerview.XRecyclerView>
+
+            </FrameLayout>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+
+    </LinearLayout>
 
 </layout>
