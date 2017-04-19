@@ -52,6 +52,6 @@ public class MessageViewModel extends BaseModel<FragmentMessageBinding, MessageC
     public void getMessageData() {
         Map<String, Integer> map = new HashMap<>();
 
-        mControl.getMessageData(this, map, 1);
+        mControl.getMessageData(this, map, 1,"getMessageData");
     }
 }

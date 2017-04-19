@@ -71,7 +71,7 @@ public class InforModel extends BaseModel<ActivityInforBinding, InforControlImpl
     public void getExpert(int exerptId) {
         Map<String, Integer> map = new HashMap<>();
         map.put("expertId", exerptId);
-        mControl.findExpert(this, map, 2);
+        mControl.findExpert(this, map, 2,"findExertId");
     }
 
     /**
@@ -84,7 +84,7 @@ public class InforModel extends BaseModel<ActivityInforBinding, InforControlImpl
         Map<String, Integer> map = new HashMap<>();
         map.put("commentId", mInforId);
         map.put("page", mPage);
-        mControl.getCommentData(this, map, 1);
+        mControl.getCommentData(this, map, 1,"getCommentData");
 
     }
 }

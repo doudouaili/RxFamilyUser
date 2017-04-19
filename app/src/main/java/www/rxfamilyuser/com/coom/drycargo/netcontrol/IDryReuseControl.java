@@ -11,5 +11,5 @@ import www.rxfamilyuser.com.network.RequestCallBack;
 public interface IDryReuseControl {
 
 
-    void getDryData(RequestCallBack callBack, Map<String, Integer> map, int tag);
+    void getDryData(RequestCallBack callBack, Map<String, Integer> map, int tag,String name);
 }

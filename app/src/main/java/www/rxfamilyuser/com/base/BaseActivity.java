@@ -14,11 +14,14 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 import www.rxfamilyuser.com.util.AppManagerUtils;
+import www.rxfamilyuser.com.util.DialogUtil;
 
 public abstract class BaseActivity<T extends ViewDataBinding, M extends BaseModel> extends AutoLayoutActivity implements IModelActivitiy<T> {
 
     public T mBinder = null;//binder
     public M mModel = null;
+
+    public DialogUtil mDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,11 +107,31 @@ public abstract class BaseActivity<T extends ViewDataBinding, M extends BaseMode
         Intent intent = new Intent(getApplicationContext(), tarActivity);
         startActivity(intent);
     }
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         SwipeBackHelper.onPostCreate(this);
     }
 
+    /**
+     * 显示进度条
+     */
+    public void showWaitDialog() {
+        if (hasWindowFocus()) {
+            if (mDialog == null) {
+                mDialog = new DialogUtil(this);
+            }
+            mDialog.show();
+        }
+    }
 
+    /**
+     * 隐藏进度条
+     */
+    public void hideWaitDialog() {
+        if (mDialog != null) {
+            mDialog.dismiss();
+        }
+    }
 }

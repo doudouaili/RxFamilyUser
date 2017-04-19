@@ -69,7 +69,6 @@ public class CircleViewModel extends BaseModel<FragmentCircleBinding, CircleCont
     public void getInvitationListData(int page) {
         Map<String, Integer> map = new HashMap<String, Integer>();
         map.put("page", page);
-        mControl.getInvitationListData(this, map, 1);
-
+        mControl.getInvitationListData(this, map, 1, "getInvitationData");
     }
 }

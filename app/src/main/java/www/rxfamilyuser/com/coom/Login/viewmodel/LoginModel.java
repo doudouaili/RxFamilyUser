@@ -10,16 +10,15 @@ import com.blankj.utilcode.utils.StringUtils;
 import com.blankj.utilcode.utils.ToastUtils;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import www.rxfamilyuser.com.base.BaseModel;
 import www.rxfamilyuser.com.coom.Login.bean.UserBean;
 import www.rxfamilyuser.com.coom.Login.netcontrol.impl.ILoginControlImpl;
 import www.rxfamilyuser.com.coom.Login.view.LoginActivity;
-import www.rxfamilyuser.com.coom.Login.view.MainActivity;
 import www.rxfamilyuser.com.coom.Login.view.RegisterActivity;
 import www.rxfamilyuser.com.databinding.ActivityLoginBinding;
+import www.rxfamilyuser.com.util.AESHelperUtil;
 import www.rxfamilyuser.com.util.AppManagerUtils;
 import www.rxfamilyuser.com.util.SPkeyConstantUtil;
 
@@ -32,7 +31,7 @@ public class LoginModel extends BaseModel<ActivityLoginBinding, ILoginControlImp
 
     @Override
     public void onBeforeRequest(int tag) {
-        mDialog.show();
+        UI.showWaitDialog();
     }
 
     @Override
@@ -42,26 +41,43 @@ public class LoginModel extends BaseModel<ActivityLoginBinding, ILoginControlImp
         switch (tag) {
             case 1:
                 UserBean userBean = (UserBean) bean;
+                SPUtils spUtils = new SPUtils(SPkeyConstantUtil.SSP_KEY);
+
                 if (userBean.getCode() != 0) {
-                    List<UserBean.User> users = userBean.getResult();
-                    SPUtils spUtils = new SPUtils(SPkeyConstantUtil.SSP_KEY);
-                    if (users != null) {
-                        spUtils.putBoolean("login", true);
-                        spUtils.putString("phone", users.get(0).getUser_phone());
-                        spUtils.putString("photo", users.get(0).getUser_photo());
-                    }
+                    UserBean.DataBean dataBean = userBean.getData().get(0);
+
+                    //登录
+                    spUtils.putBoolean("login", true);
                     //保存用户名
                     spUtils.putBoolean("saveuser", mBinder.checkEnableLogin.isChecked());
-
                     //自动登录
                     spUtils.putBoolean("automaticlogin", mBinder.checkRememberPwd.isChecked());
 
-                    Intent intent = new Intent(getContent(), MainActivity.class);
-                    getContent().startActivity(intent);
+                    String user_phone = dataBean.getUser_phone();
+                    String user_password = dataBean.getUser_password();
+
+                    user_phone = AESHelperUtil.decrypt(user_phone);
+                    user_password = AESHelperUtil.decrypt(user_password);
+                    dataBean.setUser_phone(user_phone);
+                    dataBean.setUser_password(user_password);
+
+                    //手机号
+                    spUtils.putString("user_phone", user_phone);
+                    //密码
+                    spUtils.putString("user_password", user_password);
+                    //用户id
+                    spUtils.putInt("user_id", dataBean.getUser_id());
+                    //用户头像
+                    spUtils.putString("user_photo", dataBean.getUser_photo());
+                    //用户名称
+                    spUtils.putString("user_name", dataBean.getUser_name());
+
                     AppManagerUtils.getAppManager().finishActivity(LoginActivity.class);
-                    ToastUtils.showShortToast(userBean.getMsg());
+                }else {
+                    //登录
+                    spUtils.putBoolean("login", false);
                 }
-                ToastUtils.showShortToast(userBean.getMsg());
+                ToastUtils.showShortToast(userBean.getMessage());
                 break;
         }
     }
@@ -82,6 +98,9 @@ public class LoginModel extends BaseModel<ActivityLoginBinding, ILoginControlImp
         if (phone == "" | passWord == "") {
             return;
         }
+        phone = AESHelperUtil.encrypt(phone);
+        passWord = AESHelperUtil.encrypt(passWord);
+
         Map<String, String> map = new HashMap<>();
         map.put("user_phone", phone);
         map.put("user_password", passWord);

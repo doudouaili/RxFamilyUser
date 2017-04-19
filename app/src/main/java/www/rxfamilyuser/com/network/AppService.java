@@ -20,6 +20,7 @@ import www.rxfamilyuser.com.coom.find.bean.MessageBean;
  */
 
 public interface AppService {
+
     /**
      * 注册接口
      * <P @FieldMap的post提交一定要加@FormUrlEncoded注解,不然报错
@@ -30,7 +31,7 @@ public interface AppService {
      * @Header("Cache-Control") String cacheControl是缓存 />
      */
     @FormUrlEncoded
-    @POST("concentrantion/DisplayHeader")
+    @POST("restful/register")
     Observable<UserBean> register(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, String> map);
 
     /**
@@ -41,7 +42,7 @@ public interface AppService {
      * @return
      */
     @FormUrlEncoded
-    @POST("concentrantion/FindPas")
+    @POST("restful/findPass")
     Observable<UserBean> findPassWord(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, String> map);
 
     /**
@@ -52,7 +53,7 @@ public interface AppService {
      * @return
      */
     @FormUrlEncoded
-    @POST("concentrantion/Login")
+    @POST("restful/login")
     Observable<UserBean> login(@Header("Cache-Control") String cacheControl, @FieldMap Map<String, String> map);
 
     /**

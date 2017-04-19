@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+import www.rxfamilyuser.com.util.DialogUtil;
+
 /**
  * Created by ali on 2017/2/23.
  */
@@ -20,6 +22,7 @@ import java.lang.reflect.Type;
 public abstract class BaseFragment<T extends ViewDataBinding, M extends BaseModel> extends Fragment implements IModelActivitiy<T> {
     public T mBinder = null;//binder
     public M mModel = null;
+    public DialogUtil mDialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,7 +44,6 @@ public abstract class BaseFragment<T extends ViewDataBinding, M extends BaseMode
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinder = DataBindingUtil.inflate(LayoutInflater.from(getActivity()), getLayoutId(), null, false);
-
 
         mModel.setView(this);
         mModel.onCreate();
@@ -86,6 +88,25 @@ public abstract class BaseFragment<T extends ViewDataBinding, M extends BaseMode
     public void onDestroy() {
         super.onDestroy();
         mModel.onDestroy();
+    }
+
+    /**
+     * 显示进度条
+     */
+    public void showWaitDialog() {
+        if (mDialog == null) {
+            mDialog = new DialogUtil(getActivity());
+        }
+        mDialog.show();
+    }
+
+    /**
+     * 隐藏进度条
+     */
+    public void hideWaitDialog() {
+        if (mDialog != null) {
+            mDialog.dismiss();
+        }
     }
 
 

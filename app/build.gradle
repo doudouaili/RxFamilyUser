@@ -47,8 +47,8 @@ dependencies {
     //适配
     //圆形图片
     //activity右滑删除
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.android.support:cardview-v7:25.1.0'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:cardview-v7:25.3.1'
     compile 'io.reactivex.rxjava2:rxjava:2.0.1'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
@@ -60,11 +60,11 @@ dependencies {
     compile 'com.google.code.gson:gson:2.6.1'
     compile 'com.blankj:utilcode:1.3.6'
     compile 'com.zhy:autolayout:1.4.5'
-    compile 'com.android.support:design:25.1.0'
+    compile 'com.android.support:design:25.3.1'
     compile 'com.jcodecraeer:xrecyclerview:1.3.2'
-    compile 'com.android.support:support-v4:25.1.0'
+    compile 'com.android.support:support-v4:25.3.1'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.jude:swipebackhelper:3.1.2'
-    testCompile 'junit:junit:4.12'
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
+    testCompile 'junit:junit:4.12'
 }

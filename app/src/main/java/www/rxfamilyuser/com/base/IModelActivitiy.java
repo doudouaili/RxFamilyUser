@@ -18,4 +18,14 @@ public interface IModelActivitiy<T extends ViewDataBinding> {
      */
     Context getConText();
 
+    /**
+     * 加载ProgressDialog
+     */
+     void showWaitDialog();
+
+    /**
+     * 隐藏ProgressDialog
+     */
+     void hideWaitDialog();
+
 }

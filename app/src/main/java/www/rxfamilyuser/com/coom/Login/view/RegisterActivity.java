@@ -11,10 +11,6 @@ import com.blankj.utilcode.utils.ToastUtils;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 import www.rxfamilyuser.com.R;
 import www.rxfamilyuser.com.base.BaseActivity;
 import www.rxfamilyuser.com.coom.Login.viewmodel.RegisterModel;
@@ -39,16 +35,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
 
                 } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-                    //获取验证码成功
-                    Observable.just(data)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new Consumer<Object>() {
-                                @Override
-                                public void accept(Object o) throws Exception {
-                                    ToastUtils.showShortToast("获取验码成功");
-                                }
-                            });
+                    mModel.getCodeSuccess(data);
 
                 } else if (event == SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES) {
                     //返回支持发送验证码的国家列表
@@ -57,7 +44,6 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
             } else {
                 ((Throwable) data).printStackTrace();
                 ToastUtils.showShortToast("当前手机号发送短信的数量超过限");
-
             }
         }
     };
@@ -81,7 +67,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
             case 1://注册
                 new TitleBuilderUtils(this)
                         .setTitleText(getResources().getString(R.string.register))
-                        .setLeftImage(R.mipmap.icon_back)
+                        .setLeftImage(R.mipmap.arrow_back)
                         .setLeftOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

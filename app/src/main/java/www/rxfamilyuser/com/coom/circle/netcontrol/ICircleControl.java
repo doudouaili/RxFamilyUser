@@ -10,5 +10,5 @@ import www.rxfamilyuser.com.network.RequestCallBack;
 
 public interface ICircleControl {
 
-    void getInvitationListData(RequestCallBack callBack, Map<String, Integer> map, int i);
+    void getInvitationListData(RequestCallBack callBack, Map<String, Integer> map, int i,String methodName);
 }

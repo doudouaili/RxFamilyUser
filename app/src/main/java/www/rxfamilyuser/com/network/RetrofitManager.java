@@ -48,8 +48,10 @@ public class RetrofitManager {
 
     public RetrofitManager() {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(HTTP_URL)
-                .client(getOkHttpClient()).addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build();
+                .client(getOkHttpClient())
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
         mMallService = retrofit.create(AppService.class);
     }
 

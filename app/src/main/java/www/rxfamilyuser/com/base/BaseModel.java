@@ -12,7 +12,6 @@ import java.lang.reflect.Type;
 
 import www.rxfamilyuser.com.R;
 import www.rxfamilyuser.com.network.RequestCallBack;
-import www.rxfamilyuser.com.util.DialogUtil;
 
 
 /**
@@ -25,14 +24,13 @@ public abstract class BaseModel<T extends ViewDataBinding, M extends IBaseContro
     protected T mBinder = null;
     protected M mControl = null;
 
-    public DialogUtil mDialog;
+
     public View mNotWorkView;//无网络图片
 
     public void setView(IModelActivitiy activity) {
 
         UI = activity;
         mBinder = (T) UI.getBinder();
-        mDialog = new DialogUtil(UI.getConText());
         mNotWorkView = View.inflate(UI.getConText(), R.layout.network, null);
 
         Type genType = getClass().getGenericSuperclass();
@@ -70,7 +68,7 @@ public abstract class BaseModel<T extends ViewDataBinding, M extends IBaseContro
     @Override
     public void onDestroy() {
         mControl.disposableCancel();
-        mDialog.dismiss();
+        UI.hideWaitDialog();
     }
 
 
@@ -81,14 +79,14 @@ public abstract class BaseModel<T extends ViewDataBinding, M extends IBaseContro
 
     @Override
     public void success(Object data, int tag) {
-        mDialog.dismiss();
+        UI.hideWaitDialog();
         onSuccess(data, tag);
 
     }
 
     @Override
     public void error(String errorMsg) {
-        mDialog.dismiss();
+        UI.hideWaitDialog();
         onError(errorMsg);
         ToastUtils.showShortToast("网络连接异常!");
     }
@@ -112,9 +110,11 @@ public abstract class BaseModel<T extends ViewDataBinding, M extends IBaseContro
      */
     public abstract void onError(String errorMsg);
 
+
     public Context getContent() {
         return UI.getConText();
     }
+
 
 
 }

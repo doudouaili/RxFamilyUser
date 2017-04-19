@@ -10,7 +10,7 @@ import www.rxfamilyuser.com.network.RequestCallBack;
 
 public interface IJokeFragmentControl {
 
-    void getJokeList(RequestCallBack callBack, Map<String, Integer> map, int tag);
+    void getJokeList(RequestCallBack callBack, Map<String, Integer> map, int tag,String name);
 
 
 }

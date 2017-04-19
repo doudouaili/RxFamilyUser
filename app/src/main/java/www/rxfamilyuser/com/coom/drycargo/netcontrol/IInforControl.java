@@ -10,7 +10,7 @@ import www.rxfamilyuser.com.network.RequestCallBack;
 
 public interface IInforControl {
 
-    void findExpert(RequestCallBack callBack, Map<String, Integer> map, int tag);
+    void findExpert(RequestCallBack callBack, Map<String, Integer> map, int tag,String name);
 
-    void getCommentData(RequestCallBack callBack, Map<String, Integer> map, int i);
+    void getCommentData(RequestCallBack callBack, Map<String, Integer> map, int i,String name);
 }

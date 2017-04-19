@@ -34,11 +34,7 @@ public class DryCargoModel extends BaseModel<FragmentDryCargoBinding, DryCargoCo
 
     @Override
     public void onError(String errorMsg) {
-        //网络连接失败,从本地读取
-       /* String json = "";
-        TitleBean titleBean = new Gson().fromJson(json, TitleBean.class);
-        ArrayList<Fragment> fragments = addListFragment(titleBean.getData().size());
-        setTabAdapter(fragments, titleBean.getData());*/
+
     }
 
     /**

@@ -2,7 +2,6 @@ package www.rxfamilyuser.com.coom.Login.viewmodel;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.content.Intent;
 import android.os.Build;
 import android.os.CountDownTimer;
 import android.transition.Transition;
@@ -12,25 +11,24 @@ import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.blankj.utilcode.utils.RegexUtils;
-import com.blankj.utilcode.utils.SPUtils;
 import com.blankj.utilcode.utils.StringUtils;
 import com.blankj.utilcode.utils.ToastUtils;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import cn.smssdk.SMSSDK;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import www.rxfamilyuser.com.R;
 import www.rxfamilyuser.com.base.BaseModel;
 import www.rxfamilyuser.com.coom.Login.bean.UserBean;
 import www.rxfamilyuser.com.coom.Login.netcontrol.impl.IRegisterControlImpl;
-import www.rxfamilyuser.com.coom.Login.view.LoginActivity;
-import www.rxfamilyuser.com.coom.Login.view.MainActivity;
 import www.rxfamilyuser.com.coom.Login.view.RegisterActivity;
 import www.rxfamilyuser.com.databinding.ActivityRegisterBinding;
-import www.rxfamilyuser.com.util.AppManagerUtils;
-import www.rxfamilyuser.com.util.SPkeyConstantUtil;
+import www.rxfamilyuser.com.util.AESHelperUtil;
 
 /**
  * Created by ali on 2017/2/20.
@@ -47,16 +45,19 @@ public class RegisterModel extends BaseModel<ActivityRegisterBinding, IRegisterC
 
     @Override
     public void onBeforeRequest(int tag) {
-        mDialog.show();
+        UI.showWaitDialog();
     }
 
     @Override
     public void onSuccess(Object bean, int tag) {
         switch (tag) {
-            case 1:
+            case 1://注册/找回密码
                 UserBean userBean = (UserBean) bean;
                 if (userBean.getCode() == 1) {
-                    List<UserBean.User> users = userBean.getResult();
+                    ToastUtils.showShortToast(userBean.getMessage());
+                    activity.finish();
+
+                  /*  List<UserBean.User> users = userBean.getResult();
                     if (users != null) {
                         SPUtils spUtils = new SPUtils(SPkeyConstantUtil.SSP_KEY);
                         spUtils.putBoolean("login", true);
@@ -68,13 +69,12 @@ public class RegisterModel extends BaseModel<ActivityRegisterBinding, IRegisterC
                     getContent().startActivity(intent);
                     ToastUtils.showShortToast(userBean.getMsg());
                     activity.finish();
-                    AppManagerUtils.getActivity(LoginActivity.class).finish();
+                    AppManagerUtils.getActivity(LoginActivity.class).finish();*/
 
                 } else {
-                    ToastUtils.showShortToast(userBean.getMsg());
+                    ToastUtils.showShortToast(userBean.getMessage());
                 }
                 break;
-
         }
     }
 
@@ -157,7 +157,6 @@ public class RegisterModel extends BaseModel<ActivityRegisterBinding, IRegisterC
         } else {
             ToastUtils.showShortToast("您输入的手机号格式不正确");
         }
-
     }
 
     /**
@@ -178,6 +177,11 @@ public class RegisterModel extends BaseModel<ActivityRegisterBinding, IRegisterC
             ToastUtils.showShortToast("您输入的两次密码不一致");
             return;
         }
+
+        //加密上传
+        phone = AESHelperUtil.encrypt(phone);
+        psw = AESHelperUtil.encrypt(psw);
+
         Map<String, String> map = new HashMap<>();
         map.put("user_name", name);
         map.put("user_password", psw);
@@ -197,10 +201,14 @@ public class RegisterModel extends BaseModel<ActivityRegisterBinding, IRegisterC
         if (phone == "" | code == "" | psw == "" | againPaw == "") {
             return;
         }
+
         if (!psw.equals(againPaw)) {
             ToastUtils.showShortToast("您输入的两次密码不一致");
             return;
         }
+
+        phone = AESHelperUtil.encrypt(phone);
+        psw = AESHelperUtil.encrypt(psw);
 
         Map<String, String> map = new HashMap<>();
         map.put("user_password", psw);
@@ -297,6 +305,24 @@ public class RegisterModel extends BaseModel<ActivityRegisterBinding, IRegisterC
     }
 
     /**
+     * 获取验证码成功的回调
+     *
+     * @param data
+     */
+    public void getCodeSuccess(Object data) {
+
+        Observable.just(data)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        ToastUtils.showShortToast("获取验码成功");
+                    }
+                });
+    }
+
+    /**
      * 验证码时间设置
      */
     class TimeCount extends CountDownTimer {
@@ -326,6 +352,4 @@ public class RegisterModel extends BaseModel<ActivityRegisterBinding, IRegisterC
             mBinder.btnCode.setTextColor(activity.getResources().getColor(R.color.login_view));
         }
     }
-
-
 }

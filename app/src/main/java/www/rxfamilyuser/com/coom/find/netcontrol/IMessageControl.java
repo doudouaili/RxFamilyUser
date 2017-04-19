@@ -9,5 +9,5 @@ import www.rxfamilyuser.com.network.RequestCallBack;
  */
 
 public interface IMessageControl {
-    void getMessageData(RequestCallBack requestCallBack, Map<String, Integer> map, int tag);
+    void getMessageData(RequestCallBack requestCallBack, Map<String, Integer> map, int tag,String name);
 }

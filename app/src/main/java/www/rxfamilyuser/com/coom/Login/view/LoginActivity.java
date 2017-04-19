@@ -14,7 +14,6 @@ import www.rxfamilyuser.com.util.TitleBuilderUtils;
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginModel> {
 
-
     @Override
     public int getLayoutId() {
         return R.layout.activity_login;
@@ -22,9 +21,10 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginModel
 
     @Override
     public void initView() {
+
         new TitleBuilderUtils(this)
                 .setTitleText(getResources().getString(R.string.login))
-                .setLeftImage(R.mipmap.icon_back)
+                .setLeftImage(R.mipmap.arrow_back)
                 .setLeftOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -36,8 +36,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginModel
         //是否要求保存用户名
         SPUtils spUtils = new SPUtils(SPkeyConstantUtil.SSP_KEY);
         if (spUtils.getBoolean("saveuser")) {
-            String phone = spUtils.getString("phone");
-            mBinder.editPhoneLogin.setText(phone);
+            mBinder.editPhoneLogin.setText(spUtils.getString("user_phone"));
+            mBinder.etPasswordLogin.setText(spUtils.getString("user_password"));
         }
     }
 
@@ -55,7 +55,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginModel
     public void btnFindPassword(View view) {
         mModel.intentRegis(2);
     }
-
 
     //QQ
     public void btnQQ(View view) {

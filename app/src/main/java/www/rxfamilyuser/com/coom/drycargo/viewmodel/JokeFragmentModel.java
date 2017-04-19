@@ -69,6 +69,6 @@ public class JokeFragmentModel extends BaseModel<FragmentJokeBinding, JokeFragme
         Map<String, Integer> map = new HashMap<String, Integer>();
         map.put("jokeId", jokeId);
         map.put("page", page);
-        mControl.getJokeList(this, map, 1);
+        mControl.getJokeList(this, map, 1,"getJokeCommentData");
     }
 }

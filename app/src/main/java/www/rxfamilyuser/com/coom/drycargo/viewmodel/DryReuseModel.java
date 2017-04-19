@@ -98,7 +98,7 @@ public class DryReuseModel extends BaseModel<FragmentDryReuseBinding, DryReuseCo
         Map<String, Integer> map = new HashMap<>();
         map.put("type", type);
         map.put("page", page);
-        mControl.getDryData(this, map, 1);
+        mControl.getDryData(this, map, 1,"infor");
     }
 
     /**

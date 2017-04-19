@@ -66,6 +66,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
         this.mItemLayout = item;
     }
 
+
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
